@@ -1,0 +1,154 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Kayıt ol - DestekBizden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/content/images/icon/favicon.ico">
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/content/css/themify-icons.css">
+    <link rel="stylesheet" href="/content/css/metisMenu.css">
+    <link rel="stylesheet" href="/content/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/content/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="/content/css/typography.css">
+    <link rel="stylesheet" href="/content/css/default-css.css">
+    <link rel="stylesheet" href="/content/css/styles.css">
+    <link rel="stylesheet" href="/content/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="/content/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- login area start -->
+    <div class="login-area">
+        <div class="container">
+            <div class="login-box ptb--100">
+                @using (Html.BeginForm("Register", "Identity", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "loginForm", @class = "login-form", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="login-form-head">
+                        <h4>Kayıt Ol</h4>
+                        <p>Kayıt olmak için lütfen aşağıdaki formu doldurarak gönder tuşuna basınız.</p>
+                    </div>
+                    <div class="login-form-body">
+
+                        @if (Model.Errors.Any())
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <ul>
+                                    @foreach (var error in Model.Errors)
+                                    {
+                                        <li>@error</li>
+                                    }
+                                </ul>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span class="fa fa-times"></span>
+                                </button>
+                            </div>
+                        }
+
+                        <div class="form-gp">
+                            <label for="txtFirstname">Adınız</label>
+                            <input type="text" id="txtFirstname" name="Firstname">
+                            <i class="ti-user"></i>
+                        </div>
+                        <div class="form-gp">
+                            <label for="txtLastname">Soyadınız</label>
+                            <input type="text" id="txtLastname" name="Lastname">
+                            <i class="ti-user"></i>
+                        </div>
+                        <div class="form-gp">
+                            @*<label for="ddlOccupation">Göreviniz</label>*@
+                            <select name="Occupation" class="custom-select">
+                                <option value="">Görevinizi seçiniz</option>
+                                <option value="2">Hastane Yetkilisi</option>
+                            </select>
+                        </div>
+                        <div class="form-gp">
+                            @*<label for="ddlOrganization">Hastane</label>*@
+                            <select name="OrganizationId" class="custom-select">
+                                <option value="">Hastanenizi seçiniz</option>
+                                @foreach (var organization in Model.Organizations.OrderBy(o => o.Name))
+                                {
+                                    <option value="@organization.OrganizationId">@organization.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-gp">
+                            <label for="txtEmail">E-posta adresiniz</label>
+                            <input type="email" id="txtEmail" name="Email">
+                            <i class="ti-email"></i>
+                            <div class="text-danger"></div>
+                        </div>
+                        <div class="form-gp">
+                            <label for="txtMobile">Cep telefonu numaranız</label>
+                            <input type="tel" id="txtMobile" name="Mobile">
+                            <i class="ti-mobile"></i>
+                            <div class="text-danger"></div>
+                        </div>
+                        <div class="form-gp">
+                            <label for="txtRegistrationNumber">Diploma numaranız</label>
+                            <input type="text" id="txtRegistrationNumber" name="RegistrationNumber">
+                            <i class="ti-info"></i>
+                            <div class="text-danger"></div>
+                        </div>
+                        <div class="form-gp">
+                            <label for="txtPassword">Şifreniz</label>
+                            <input type="password" id="txtPassword" name="Password">
+                            <i class="ti-lock"></i>
+                            <div class="text-danger"></div>
+                        </div>
+                        <div class="submit-btn-area">
+                            <button id="form_submit" type="submit">GÖNDER <i class="ti-arrow-right"></i></button>
+                            @*<div class="login-other row mt-4">
+                                    <div class="col-6">
+                                        <a class="fb-login" href="#">Log in with <i class="fa fa-facebook"></i></a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="google-login" href="#">Log in with <i class="fa fa-google"></i></a>
+                                    </div>
+                                </div>*@
+                        </div>
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">Hesabınız var mı? <a href="/login">Oturum Aç</a></p>
+                        </div>
+                    </div>
+                }
+                }
+            </div>
+            <!-- login area end -->
+            <!-- jquery latest version -->
+            <script src="/content/js/vendor/jquery-2.2.4.min.js"></script>
+            <!-- bootstrap 4 js -->
+            <script src="/content/js/popper.min.js"></script>
+            <script src="/content/js/bootstrap.min.js"></script>
+            <script src="/content/js/owl.carousel.min.js"></script>
+            <script src="/content/js/metisMenu.min.js"></script>
+            <script src="/content/js/jquery.slimscroll.min.js"></script>
+            <script src="/content/js/jquery.slicknav.min.js"></script>
+
+            <!-- others plugins -->
+            <script src="/content/js/plugins.js"></script>
+            <script src="/content/js/scripts.js"></script>
+</body>
+
+</html>

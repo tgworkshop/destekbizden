@@ -1,0 +1,32 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.ErrorViewModel
+@{
+    ViewBag.Title = "Hata";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 404 Section -->
+<div class="section-block clear-height pt-150 pb-150">
+    <div class="row">
+        <div class="column width-12 center">
+            @if (Model.HttpStatusCode.HasValue)
+            {
+                <h1 class="status-code-title status-code color-gradient-purple-haze">@Model.HttpStatusCode</h1>
+            }
+            @{ if (Model.HttpStatusCode == 401)
+                {
+                    <h3 class="title-medium color-color mb-40 mb-mobile-40">Ne yazık ki bu sayfayı görüntülemek için yeterli yetkiniz yok. Anasayfaya dönmek için aşağıdaki butona tıklayabilirsiniz.</h3>
+                }
+                else if (Model.HttpStatusCode == 404)
+                {
+                    <h3 class="title-medium color-color mb-40 mb-mobile-40">Böyle bir sayfa hiç olmadı, ama yakında olabilir. En iyisi aşağıdan anasayfaya tıklamak.</h3>
+                }
+                else
+                {
+                    <h3 class="title-medium color-color mb-40 mb-mobile-40">Bir takım hatalar söz konusu. En iyisi aşağıdan anasayfaya tıklamak.</h3>
+                }
+            }
+            <a href="/turkey" class="button rounded large bkg-theme bkg-hover-theme color-white color-hover-white shadow-hover">Tık</a>
+        </div>
+    </div>
+</div>
+<!-- 404 Section End -->

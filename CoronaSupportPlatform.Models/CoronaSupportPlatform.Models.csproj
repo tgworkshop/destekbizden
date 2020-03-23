@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58C77322-6B19-455B-A118-1111AE04A5CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoronaSupportPlatform.Models</RootNamespace>
+    <AssemblyName>CoronaSupportPlatform.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\CacheConfig.cs" />
+    <Compile Include="Configuration\ConfigRecord.cs" />
+    <Compile Include="Configuration\ContextConfig.cs" />
+    <Compile Include="Configuration\LoggingConfig.cs" />
+    <Compile Include="Configuration\SecurityConfig.cs" />
+    <Compile Include="Configuration\SessionConfig.cs" />
+    <Compile Include="CoronaSupportPlatformDbContext.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Identity\CSPRole.cs" />
+    <Compile Include="Identity\CSPRoleStore.cs" />
+    <Compile Include="Identity\CSPSignInManager.cs" />
+    <Compile Include="Identity\CSPUser.cs" />
+    <Compile Include="Identity\CSPUserClaim.cs" />
+    <Compile Include="Identity\CSPUserLogin.cs" />
+    <Compile Include="Identity\CSPUserManager.cs" />
+    <Compile Include="Identity\CSPUserRole.cs" />
+    <Compile Include="Identity\CSPUserStore.cs" />
+    <Compile Include="Metadata\Location.cs" />
+    <Compile Include="Migrations\202003211938089_DB-Init.cs" />
+    <Compile Include="Migrations\202003211938089_DB-Init.designer.cs">
+      <DependentUpon>202003211938089_DB-Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003212013089_DB-Improvement-ProductsAndTenders.cs" />
+    <Compile Include="Migrations\202003212013089_DB-Improvement-ProductsAndTenders.designer.cs">
+      <DependentUpon>202003212013089_DB-Improvement-ProductsAndTenders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003212102499_DB-Improvement-Locations.cs" />
+    <Compile Include="Migrations\202003212102499_DB-Improvement-Locations.designer.cs">
+      <DependentUpon>202003212102499_DB-Improvement-Locations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003221625223_DB-Improvement-TenderEntityInheritance.cs" />
+    <Compile Include="Migrations\202003221625223_DB-Improvement-TenderEntityInheritance.designer.cs">
+      <DependentUpon>202003221625223_DB-Improvement-TenderEntityInheritance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003221639111_DB-Improvement-TenderItemEntityInheritance.cs" />
+    <Compile Include="Migrations\202003221639111_DB-Improvement-TenderItemEntityInheritance.designer.cs">
+      <DependentUpon>202003221639111_DB-Improvement-TenderItemEntityInheritance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Organization.cs" />
+    <Compile Include="OrganizationProperty.cs" />
+    <Compile Include="OrganizationTag.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="Tender.cs" />
+    <Compile Include="TenderItem.cs" />
+    <Compile Include="TenderItemProperty.cs" />
+    <Compile Include="TenderItemTag.cs" />
+    <Compile Include="TenderProperty.cs" />
+    <Compile Include="TenderTag.cs" />
+    <Compile Include="UserProperty.cs" />
+    <Compile Include="UserTag.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoronaSupportPlatform.Common\CoronaSupportPlatform.Common.csproj">
+      <Project>{0525DB03-A63A-487C-BF34-BB23DC82FE3C}</Project>
+      <Name>CoronaSupportPlatform.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003211938089_DB-Init.resx">
+      <DependentUpon>202003211938089_DB-Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003212013089_DB-Improvement-ProductsAndTenders.resx">
+      <DependentUpon>202003212013089_DB-Improvement-ProductsAndTenders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003212102499_DB-Improvement-Locations.resx">
+      <DependentUpon>202003212102499_DB-Improvement-Locations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003221625223_DB-Improvement-TenderEntityInheritance.resx">
+      <DependentUpon>202003221625223_DB-Improvement-TenderEntityInheritance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003221639111_DB-Improvement-TenderItemEntityInheritance.resx">
+      <DependentUpon>202003221639111_DB-Improvement-TenderItemEntityInheritance.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

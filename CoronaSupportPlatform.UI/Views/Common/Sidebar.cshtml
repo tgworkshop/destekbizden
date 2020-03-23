@@ -1,0 +1,43 @@
+﻿@{ 
+    var path = Request.Url.LocalPath;
+}
+
+<div class="sidebar-menu">
+    <div class="sidebar-header" style="text-align:center;" ">
+        <div>
+            <a href="/" class="h4" style="color:white;">DestekBizden</a>
+        </div>
+    </div>
+    <div class="main-menu">
+        <div class="menu-inner">
+            <nav>
+                <ul class="metismenu" id="menu">
+                    <li @(path == "/" ? "class=active" : "")>
+                        <a href="/" aria-expanded="true"><i class="ti-dashboard"></i><span>Giriş</span></a>
+                    </li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li @(path.Contains("Users") ? "class=active" : "")>
+                            <a href="javascript:void(0)" aria-expanded="true">
+                                <i class="ti-user"></i><span>Kullanıcılar</span>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="/Users">Kullanıcı Listesi</a></li>
+                                <li><a href="/Users/New">Yeni Kullanıcı</a></li>
+                            </ul>
+                        </li>
+                    }
+                    <li @(path.Contains("Tenders") ? "class=active" : "")>
+                        <a href="javascript:void(0)" aria-expanded="true">
+                            <i class="ti-receipt"></i></i><span>İhtiyaçlar</span>
+                        </a>
+                        <ul class="collapse">
+                            <li><a href="/Tenders">İhtiyaç Listesi</a></li>
+                            <li><a href="/Tenders/New">Yeni İhtiyaç</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Tenders.TenderViewModel
+@{
+    ViewBag.Title = "Yeni İhtiyaç";
+}
+
+<div class="main-content-inner">
+    @using (Html.BeginForm("New", "Tenders", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "editForm", role = "form" }))
+    {
+        @Html.HiddenFor(o => Model.CurrentOrganization.OrganizationId)
+
+        <div class="mt-5 mb-5">
+            <div class="col-lg-12 mt-sm-30 mt-xs-30">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mt-4">
+                            @if (Model.Errors.Any())
+                            {
+                                <div class="row alert alert-danger alert-dismissible fade show" role="alert">
+                                    <ul>
+                                        @foreach (var error in Model.Errors)
+                                        {
+                                            <li>@error</li>
+                                        }
+                                    </ul>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span class="fa fa-times"></span>
+                                    </button>
+                                </div>
+                            }
+                            <div class="row mb-3 form-gp">
+                                <div class="col-12">
+                                    <strong>Talep Adı</strong>
+                                    <br />
+                                    <input type="text" name="ShortDescription" value="" />
+                                </div>
+                            </div>
+                            <div class="row mb-3 form-gp">
+                                <div class="col-12">
+                                    <strong>Hastane</strong>
+                                    <br />
+                                    @(Model.CurrentOrganization?.Name)
+                                </div>
+                            </div>
+                            <div class="row mb-3 form-gp">
+                                <div class="col-12">
+                                    <strong>İhtiyaç Dahilindeki Ürünler</strong>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row form-gp ml-0">
+                                @foreach (var product in Model.Products)
+                                {
+                                    <div class="col-sm-8 p-3 mb-1" style="border:solid 1px lightgray">
+                                        <img src="~/Content/images/products/@(product.ProductId).jpg" style="width:50px" /> @product.Name
+                                    </div>
+                                    <div class="col-sm-4 p-2 mb-1" style="border:solid 1px lightgray">
+                                        <br />
+                                        <input name="ProductQuantities" class="input-group-text" style="background-color:white" placeholder="Adet" type="number" id="Product_@product.ProductId" value="0" />
+                                    </div>
+                                }
+                            </div>
+                            <div class="row mb-3 form-gp">
+                                <div class="col-12">
+                                    <strong>Mesajınız</strong>
+                                    <br />
+                                    <textarea name="LongDescription" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-success mb-1 pull-right" value="Kaydet" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

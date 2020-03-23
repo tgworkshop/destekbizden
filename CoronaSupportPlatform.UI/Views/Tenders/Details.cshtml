@@ -1,0 +1,23 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Tenders.TenderViewModel
+@{
+    ViewBag.Title = "İhtiyaç Detay";
+}
+
+<ul>
+    <li>Talep adı:</li>
+    <li>@Model.TenderId</li>
+    <li>Hastane</li>
+    <li>@Model.Organization.Name</li>
+    <li>Mesaj</li>
+    <li>@Model.LongDescription</li>
+    <li>Talep Edilen Ürünler</li>
+    @foreach (var item in Model.Items)
+    {
+        <li style="list-style:circle">@item.Quantity adet @Model.Products.FirstOrDefault(p => p.ProductId == item.ProductId).Name</li>
+    }
+</ul>
+
+<div class="modal-footer">
+    <button onclick="updateTenderStatus(2,@Model.TenderId)" type="button" class="btn btn-success">Talep Karşılandı</button>
+    <button onclick="updateTenderStatus(0,@Model.TenderId)" type="button" class="btn btn-danger">Talebi Sil</button>
+</div>

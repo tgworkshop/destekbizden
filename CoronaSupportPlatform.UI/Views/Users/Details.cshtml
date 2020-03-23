@@ -1,0 +1,104 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Users.UserViewModel
+
+@{ 
+    var occupation = "";
+    switch (Model.OccupationId.GetValueOrDefault())
+    {
+        case 1:
+            occupation = "Yönetici";
+            break;
+        case 2:
+            occupation = "Hastane Yetkilisi";
+            break;
+    }
+
+    var status = "";
+    switch (Model.Status)
+    {
+        case CoronaSupportPlatform.Common.EntityStatus.Active:
+            status = "Aktif";
+            break;
+        case CoronaSupportPlatform.Common.EntityStatus.Draft:
+            status = "Onay bekliyor";
+            break;
+         case CoronaSupportPlatform.Common.EntityStatus.Passive:
+            status = "Pasif";
+            break;
+    }
+}
+
+<!-- page title area end -->
+<div class="main-content-inner">
+    <div class="mt-5 mb-5">
+        <div class="col-lg-12 mt-sm-30 mt-xs-30">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-between align-items-center">
+                        <h4 class="header-title">@Model.Firstname @Model.Lastname</h4>                                        
+                    </div>
+                    <div class="mt-4">
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <strong>Ad</strong>
+                            </div>
+                            <div class="col-4">
+                                @Model.Firstname
+                            </div>
+                            <div class="col-2">
+                                <strong>Soyad</strong>
+                            </div>
+                            <div class="col-4">
+                                @Model.Lastname
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <strong>Hastane</strong>
+                            </div>
+                            <div class="col-4">
+                                @Model.OrganizationName
+                            </div>
+                            <div class="col-2">
+                                <strong>Görev</strong>
+                            </div>
+                            <div class="col-4">
+                                @occupation
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <strong>E-posta</strong>
+                            </div>
+                            <div class="col-4">
+                                <a href="mailto:@Model.Email">@Model.Email</a>
+                            </div>
+                            <div class="col-2">
+                                <strong>Cep Telefonu</strong>
+                            </div>
+                            <div class="col-4">
+                                @Model.Mobile
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <strong>Durum</strong>
+                            </div>
+                            <div class="col-4">
+                                @status
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col-4">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-primary mb-1 pull-right" href="/Users/@Model.UserId/Edit">Güncelle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

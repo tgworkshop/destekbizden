@@ -1,0 +1,61 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Users.UserListViewModel
+
+<!-- page title area end -->
+<div class="main-content-inner">
+    <div class="mt-5 mb-5">
+        <div class="col-lg-12 mt-sm-30 mt-xs-30">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-between align-items-center">
+                        <h4 class="header-title">Kullanıcı Listesi</h4>
+                    </div>
+                    <div class="trad-history mt-4">
+                        <div class="single-table">
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead class="text-uppercase bg-primary">
+                                        <tr class="text-white">
+                                            <th scope="col">Kullanıcı ID</th>
+                                            <th scope="col">Ad Soyad</th>
+                                            <th scope="col">Hastane</th>
+                                            <th scope="col">Görev</th>
+                                            <th scope="col">İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            var occupation = "";
+                                            switch (user.OccupationId.GetValueOrDefault())
+                                            {
+                                                case 1:
+                                                    occupation = "Yönetici";
+                                                    break;
+                                                case 2:
+                                                    occupation = "Hastane Yetkilisi";
+                                                    break;
+                                            }
+                                            <tr>
+                                                <th scope="row">@user.UserId</th>
+                                                <td>@user.Firstname @user.Lastname</td>
+                                                <td>@user.OrganizationName</td>
+                                                <td>@occupation</td>
+                                                <td>
+                                                    <i class="ti-search" onclick="document.location.href = '/Users/@user.UserId';"></i>
+                                                    &nbsp;
+                                                    <i class="ti-pencil" onclick="document.location.href = '/Users/@user.UserId/Edit';"></i>
+                                                    &nbsp;
+                                                    <i class="ti-trash"></i>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
