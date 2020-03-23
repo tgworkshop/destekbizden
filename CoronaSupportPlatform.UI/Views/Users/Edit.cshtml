@@ -3,6 +3,7 @@
 <div class="main-content-inner">
     @using (Html.BeginForm("Edit", "Users", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "editForm", role = "form" }))
     {
+        @Html.HiddenFor(m => m.UserId);
         <div class="mt-5 mb-5">
             <div class="col-lg-12 mt-sm-30 mt-xs-30">
                 <div class="card">
@@ -45,7 +46,7 @@
                                 </div>
                                 <div class="col-4">
                                     <select name="OrganizationId" class="custom-select">
-                                        @foreach (var organization in Model.Organizations)
+                                        @foreach (var organization in Model.Organizations.OrderBy(o => o.Name))
                                         {
                                             <option value="@organization.OrganizationId" @(organization.OrganizationId == Model.OrganizationId ? "selected" : "")>@organization.Name</option>
                                         }
@@ -57,8 +58,10 @@
                                 <div class="col-4">
                                     <select name="OccupationId" class="custom-select">
                                         <option value="1" @(((short)Model.OccupationId) == 1 ? "selected" : "")>Yönetici</option>
-                                        <option value="2" @(((short)Model.OccupationId) == 2 ? "selected" : "")>Hastane Yetkilisi</option>
+                                        <option value="2" @(((short)Model.OccupationId) == 2 ? "selected" : "")>Diğer Sağlık Personeli</option>
                                         <option value="4" @(((short)Model.OccupationId) == 4 ? "selected" : "")>Kullanıcı</option>
+                                        <option value="1004" @(((short)Model.OccupationId) == 4 ? "selected" : "")>Doktor</option>
+                                        <option value="1005" @(((short)Model.OccupationId) == 4 ? "selected" : "")>İdari Personel</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,7 +86,7 @@
                                 <div class="col-4">
                                     <select name="Status" class="custom-select">
                                         <option value="0" @(((short)Model.Status) == 0 ? "selected" : "")>Onay Bekliyor</option>
-                                        <option value="1" @(((short)Model.Status) == 2 ? "selected" : "")>Aktif</option>
+                                        <option value="1" @(((short)Model.Status) == 1 ? "selected" : "")>Aktif</option>
                                         <option value="-1" @(((short)Model.Status) == -1 ? "selected" : "")>Pasif</option>
                                     </select>
                                 </div>

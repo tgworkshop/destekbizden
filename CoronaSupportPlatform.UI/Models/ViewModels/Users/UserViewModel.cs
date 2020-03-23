@@ -42,6 +42,7 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Users
             this.Lastname = user.Lastname;
             this.Email = user.Email;
             this.Mobile = user.MobileNumber;
+            this.Status = user.Status;
 
             // Set the organization
             this.OrganizationId = user.Roles?.FirstOrDefault().OrganizationId;

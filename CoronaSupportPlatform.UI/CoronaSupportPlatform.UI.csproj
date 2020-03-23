@@ -255,7 +255,6 @@
     <Content Include="Content\fonts\themify.eot" />
     <Content Include="Content\fonts\themify.ttf" />
     <Content Include="Content\fonts\themify.woff" />
-    <Content Include="Content\images\icon\market-value\Thumbs.db" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -298,6 +297,7 @@
     <Content Include="ConnectionStrings.Release.config">
       <DependentUpon>ConnectionStrings.config</DependentUpon>
     </Content>
+    <Content Include="Views\Error\NotAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoronaSupportPlatform.Common\CoronaSupportPlatform.Common.csproj">

@@ -67,52 +67,48 @@
                         }
 
                         <div class="form-gp">
-                            <label for="txtFirstname">Adınız</label>
-                            <input type="text" id="txtFirstname" name="Firstname">
+                            <label for="txtFirstname">Adınız<span style="color:red">*</span></label>
+                            <input type="text" id="txtFirstname" name="Firstname" value="@Model.Firstname">
                             <i class="ti-user"></i>
                         </div>
                         <div class="form-gp">
-                            <label for="txtLastname">Soyadınız</label>
-                            <input type="text" id="txtLastname" name="Lastname">
+                            <label for="txtLastname">Soyadınız<span style="color:red">*</span></label>
+                            <input type="text" id="txtLastname" name="Lastname" value="@Model.Lastname">
                             <i class="ti-user"></i>
                         </div>
                         <div class="form-gp">
                             @*<label for="ddlOccupation">Göreviniz</label>*@
                             <select name="Occupation" class="custom-select">
                                 <option value="">Görevinizi seçiniz</option>
-                                <option value="2">Hastane Yetkilisi</option>
+                                <option value="1005">İdari Personel</option>
+                                <option value="1004">Doktor</option>
+                                <option value="2">Diğer Sağlık Personeli</option>
                             </select>
                         </div>
                         <div class="form-gp">
                             @*<label for="ddlOrganization">Hastane</label>*@
                             <select name="OrganizationId" class="custom-select">
                                 <option value="">Hastanenizi seçiniz</option>
-                                @foreach (var organization in Model.Organizations.OrderBy(o => o.Name))
+                                @foreach (var organization in Model.Organizations.OrderBy(o => o.City).ThenBy(o => o.Name))
                                 {
-                                    <option value="@organization.OrganizationId">@organization.Name</option>
+                                    <option value="@organization.OrganizationId" @(organization.OrganizationId == Model.OrganizationId ? "selected" : "")>@(organization.City + " " + organization.Name)</option>
                                 }
                             </select>
                         </div>
                         <div class="form-gp">
-                            <label for="txtEmail">E-posta adresiniz</label>
-                            <input type="email" id="txtEmail" name="Email">
+                            <label for="txtEmail">E-posta adresiniz<span style="color:red">*</span></label>
+                            <input type="email" id="txtEmail" name="Email" value="@Model.Email">
                             <i class="ti-email"></i>
                             <div class="text-danger"></div>
                         </div>
                         <div class="form-gp">
-                            <label for="txtMobile">Cep telefonu numaranız</label>
-                            <input type="tel" id="txtMobile" name="Mobile">
+                            <label for="txtMobile">Cep telefonu numaranız<span style="color:red">*</span></label>
+                            <input type="tel" id="txtMobile" name="Mobile" value="@Model.Mobile">
                             <i class="ti-mobile"></i>
                             <div class="text-danger"></div>
-                        </div>
+                        </div>                        
                         <div class="form-gp">
-                            <label for="txtRegistrationNumber">Diploma numaranız</label>
-                            <input type="text" id="txtRegistrationNumber" name="RegistrationNumber">
-                            <i class="ti-info"></i>
-                            <div class="text-danger"></div>
-                        </div>
-                        <div class="form-gp">
-                            <label for="txtPassword">Şifreniz</label>
+                            <label for="txtPassword">Şifreniz<span style="color:red">*</span></label>
                             <input type="password" id="txtPassword" name="Password">
                             <i class="ti-lock"></i>
                             <div class="text-danger"></div>

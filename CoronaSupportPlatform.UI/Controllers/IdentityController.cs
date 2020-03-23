@@ -72,7 +72,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                     MobileNumber = model.Mobile,
                     RegistrationNumber = model.RegistrationNumber,
                     Created = DateTime.UtcNow,
-                    Status = EntityStatus.Draft
+                    Status = EntityStatus.Active
                 };
 
                 // Set the location and check email
@@ -96,23 +96,19 @@ namespace CoronaSupportPlatform.UI.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Assign to role
-                    IdentityResult roleAssignmentResponse = null;
-                    if (model.Occupation == "2")
-                    {
-                        // Assign to role
-                        roleAssignmentResponse = UserManager.AddToRole(user.Id, "OrganizationUser");
-                    }
-                    else
-                    {
-                        roleAssignmentResponse = UserManager.AddToRole(user.Id, "User");
-                    }
-
-                    // Set the organization id
                     using (var ctx = new CoronaSupportPlatformDbContext())
                     {
+                        // Get the role id
+                        var roleId = Convert.ToInt32(model.Occupation);
+
+                        // Get roles
+                        var roles = ctx.Roles.ToList();
+
+                        // Assign to role
+                        IdentityResult roleAssignmentResponse = UserManager.AddToRole(user.Id, roles.FirstOrDefault(r => r.Id == roleId).Name);
+
                         // Load the user role
-                        var userRole = ctx.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id && ur.RoleId == 2);
+                        var userRole = ctx.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id && ur.RoleId == roleId);
                         userRole.OrganizationId = Convert.ToInt32(model.OrganizationId);
                         ctx.SaveChanges();
                     }

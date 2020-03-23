@@ -37,7 +37,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var tender in Model.Tenders.Where(t => t.State == CoronaSupportPlatform.Models.TenderState.New || t.State == CoronaSupportPlatform.Models.TenderState.Active))
+                                                @foreach (var tender in Model.Tenders.Where(t => t.State == CoronaSupportPlatform.Models.TenderState.New || t.State == CoronaSupportPlatform.Models.TenderState.Active).OrderByDescending(t => t.Created))
                                                 {
                                                     <tr>
                                                         <td style="width:10%">@tender.TenderId</td>
@@ -54,7 +54,7 @@
                                                         </td>
                                                         <td style="width:10%">@tender.StateName</td>
                                                         <td style="width:10%">
-                                                            <button onclick="document.location.href='/Tenders/@tender.TenderId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>
+                                                            @*<button onclick="document.location.href='/Tenders/@tender.TenderId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>*@
                                                         </td>
                                                     </tr>
                                                 }

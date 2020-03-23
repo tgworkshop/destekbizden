@@ -153,14 +153,14 @@ namespace CoronaSupportPlatform.UI.Controllers
                     }
 
                     // Re-Store user data in the session
-                    Session["User"] = CurrentUser;
-
-                    // Set the current organization
-                    CurrentOrganization = CurrentUser.Roles.FirstOrDefault().Organization;
+                    Session["User"] = CurrentUser;                    
                 }
 
                 // Set user roles
                 UserRoles = CurrentUser.Roles.ToList();
+
+                // Set the current organization
+                CurrentOrganization = CurrentUser.Roles.FirstOrDefault().Organization;
             }
 
             #endregion

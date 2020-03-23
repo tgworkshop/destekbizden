@@ -29,6 +29,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                 var users = ctx.Users.Include("Roles.Organization").ToList();
 
                 // Convert
+                model.Roles = roles;
                 model.Users = users.Select(u => new UserViewModel().From(u, roles)).ToList();
             }
 
@@ -135,7 +136,38 @@ namespace CoronaSupportPlatform.UI.Controllers
 
             if (ModelState.IsValid && !customErrors.Any())
             {
+                using(var ctx = new CoronaSupportPlatformDbContext())
+                {
+                    // Get the user
+                    var user = ctx.Users.Include("Roles").FirstOrDefault(u => u.Id == model.UserId);
 
+                    // Update the user
+                    user.Firstname = model.Firstname;
+                    user.Lastname = model.Lastname;
+                    user.Email = model.Email;
+                    user.MobileNumber = model.Mobile;
+                    user.Status = model.Status;
+
+                    // Update the user role
+                    var userRole = user.Roles.FirstOrDefault();
+
+                    switch (model.OccupationId.GetValueOrDefault())
+                    {
+                        case 1:
+                            userRole.OrganizationId = (int?)null;
+                            userRole.RoleId = 1;
+                            break;
+                        case 2:
+                            userRole.OrganizationId = model.OrganizationId;
+                            userRole.RoleId = 2;
+                            break;
+                    }
+
+                    ctx.SaveChanges();
+
+                    // Redirect to user list page
+                    return Redirect("/Users?a=user-updated");
+                }
             }
             else
             {

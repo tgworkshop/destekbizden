@@ -6,20 +6,20 @@ namespace CoronaSupportPlatform.UI.Controllers
 {
     public class ErrorController : Controller
     {
-        [Route("Error")]
-        public ActionResult Default()
-        {
-            return View("~/Views/Error/Index.cshtml", new ErrorViewModel());
-        }
-
-        [Route("Unauthorized")]
-        public ActionResult Unauthorized()
+        [Route("not-authorized")]
+        public ActionResult NotAuthorized()
         {
             ErrorViewModel model = new ErrorViewModel()
             {
                 HttpStatusCode = (int)HttpStatusCode.Unauthorized
             };
-            return View("~/Views/Error/Index.cshtml", model);
+            return View(model);
+        }
+
+        [Route("Error")]
+        public ActionResult Default()
+        {
+            return View("~/Views/Error/Index.cshtml", new ErrorViewModel());
         }
 
         [Route("NotFound")]

@@ -6,12 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace CoronaSupportPlatform.UI.Controllers
 {
-    [Authorize(Roles = "Administrator,SupplierUser,OrganizationUser")]
+    [Authorize(Roles = "Administrator,SupplierUser,OrganizationAdminstrator,OrganizationUser,Doctor")]
     public class HomeController : BaseController
     {
+        protected override void Initialize(RequestContext requestContext)
+        {            
+            base.Initialize(requestContext);
+
+            // Check user status
+            if (CurrentUser != null && CurrentUser.Status == Common.EntityStatus.Draft)
+            {
+                Response.Redirect("/not-authorized");
+            }
+        }
+
         [Route("")]
         public ActionResult Index()
         {

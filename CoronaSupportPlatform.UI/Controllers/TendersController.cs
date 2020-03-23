@@ -7,12 +7,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace CoronaSupportPlatform.UI.Controllers
-{
-    [RoutePrefix("tenders") ,Authorize(Roles = "Administrator,SupplierUser,OrganizationUser")]
+{    
+    [RoutePrefix("tenders") ,Authorize(Roles = "Administrator,SupplierUser,OrganizationAdminstrator,OrganizationUser,Doctor")]
     public class TendersController : BaseController
     {
+        protected override void Initialize(RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            // Check user status
+            if (CurrentUser != null && CurrentUser.Status == Common.EntityStatus.Draft)
+            {
+                Response.Redirect("/not-authorized");
+            }
+        }
+
         [Route("")]
         public ActionResult Index()
         {

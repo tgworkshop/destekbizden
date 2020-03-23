@@ -19,6 +19,7 @@
                                             <th scope="col">Ad Soyad</th>
                                             <th scope="col">Hastane</th>
                                             <th scope="col">Görev</th>
+                                            <th scope="col">Durum</th>
                                             <th scope="col">İşlemler</th>
                                         </tr>
                                     </thead>
@@ -32,7 +33,16 @@
                                                     occupation = "Yönetici";
                                                     break;
                                                 case 2:
-                                                    occupation = "Hastane Yetkilisi";
+                                                    occupation = "Diğer Sağlık Personeli";
+                                                    break;
+                                                case 4:
+                                                    occupation = "Kullanıcı";
+                                                    break;
+                                                case 1004:
+                                                    occupation = "Doktor";
+                                                    break;
+                                                case 1005:
+                                                    occupation = "İdari Personel";
                                                     break;
                                             }
                                             <tr>
@@ -40,6 +50,7 @@
                                                 <td>@user.Firstname @user.Lastname</td>
                                                 <td>@user.OrganizationName</td>
                                                 <td>@occupation</td>
+                                                <td>@user.Status</td>
                                                 <td>
                                                     <i class="ti-search" onclick="document.location.href = '/Users/@user.UserId';"></i>
                                                     &nbsp;
