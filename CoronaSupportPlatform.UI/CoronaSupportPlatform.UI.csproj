@@ -298,6 +298,7 @@
       <DependentUpon>ConnectionStrings.config</DependentUpon>
     </Content>
     <Content Include="Views\Error\NotAuthorized.cshtml" />
+    <Content Include="Views\Tenders\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoronaSupportPlatform.Common\CoronaSupportPlatform.Common.csproj">

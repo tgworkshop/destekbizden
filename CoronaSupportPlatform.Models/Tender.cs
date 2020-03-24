@@ -25,6 +25,8 @@ namespace CoronaSupportPlatform.Models
 
         public string LongDescription { get; set; }
 
+        public string Address { get; set; }
+
         public TenderState State { get; set; }
 
         #region [ Navigation properties ]

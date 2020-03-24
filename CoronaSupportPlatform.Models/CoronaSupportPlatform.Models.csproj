@@ -116,6 +116,10 @@
     <Compile Include="Migrations\202003221639111_DB-Improvement-TenderItemEntityInheritance.designer.cs">
       <DependentUpon>202003221639111_DB-Improvement-TenderItemEntityInheritance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003242041026_DB-Improvement-TenderAddresses.cs" />
+    <Compile Include="Migrations\202003242041026_DB-Improvement-TenderAddresses.designer.cs">
+      <DependentUpon>202003242041026_DB-Improvement-TenderAddresses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="OrganizationProperty.cs" />
@@ -158,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003221639111_DB-Improvement-TenderItemEntityInheritance.resx">
       <DependentUpon>202003221639111_DB-Improvement-TenderItemEntityInheritance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003242041026_DB-Improvement-TenderAddresses.resx">
+      <DependentUpon>202003242041026_DB-Improvement-TenderAddresses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

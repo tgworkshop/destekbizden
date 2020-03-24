@@ -10,8 +10,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace CoronaSupportPlatform.UI.Controllers
-{    
-    [RoutePrefix("tenders") ,Authorize(Roles = "Administrator,SupplierUser,OrganizationAdminstrator,OrganizationUser,Doctor")]
+{
+    [RoutePrefix("tenders"), Authorize(Roles = "Administrator,SupplierUser,OrganizationAdminstrator,OrganizationUser,Doctor")]
     public class TendersController : BaseController
     {
         protected override void Initialize(RequestContext requestContext)
@@ -36,13 +36,13 @@ namespace CoronaSupportPlatform.UI.Controllers
                 if (User.IsInRole("Administrator"))
                 {
                     // Load all tenders if administrator
-                    var tenders = ctx.Tenders.Include("Organization").Include("Items.Product").Include("Properties").Include("Tags").ToList();
+                    var tenders = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").Include("Properties").Include("Tags").ToList();
                     model.Tenders = tenders.Select(t => new TenderViewModel().From(t)).ToList();
                 }
                 else
                 {
                     // Load only the tenders for the current user
-                    var tenders = ctx.Tenders.Include("Organization").Include("Items.Product").Include("Properties").Include("Items").Where(u => u.UserId == CurrentUser.Id).ToList();
+                    var tenders = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").Include("Properties").Include("Items").Where(u => u.UserId == CurrentUser.Id).ToList();
                     model.Tenders = tenders.Select(t => new TenderViewModel().From(t)).ToList();
                 }
             }
@@ -142,6 +142,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                             OrganizationId = model.Organization.OrganizationId,
                             ShortDescription = model.ShortDescription,
                             LongDescription = model.LongDescription,
+                            Address = model.Address,
                             UserId = CurrentUser.Id,
                             Created = DateTime.UtcNow,
                             State = TenderState.New,
@@ -154,7 +155,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                         // Create the tender items
                         var tenderItems = new List<TenderItem>();
 
-                        for(int i = 0; i < model.Products.Count; i++)
+                        for (int i = 0; i < model.Products.Count; i++)
                         {
                             // Check for quantity
                             var quantity = Convert.ToInt32(quantityList[i]);
@@ -198,6 +199,178 @@ namespace CoronaSupportPlatform.UI.Controllers
             }
 
             return Redirect("/Tenders");
+        }
+
+        [Route("{id}")]
+        public ActionResult Details(int id)
+        {
+            var model = new TenderViewModel()
+            {
+                CurrentOrganization = CurrentOrganization,
+                CurrentUser = CurrentUser
+            };
+
+            try
+            {
+                using (var ctx = new CoronaSupportPlatformDbContext())
+                {
+                    // Get the tender
+                    var tender = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
+
+                    #region [ Authorization ]
+
+                    if (!User.IsInRole("Administrator"))
+                    {
+                        // Check the owner
+                        if (tender.UserId != UserId)
+                        {
+                            Response.Redirect("/not-authorized");
+                        }
+                    }
+
+                    #endregion
+
+                    // Load the model
+                    model.From(tender);
+
+                    #region [ Breadcrumb ]
+
+                    var breadcrumb = new BreadcrumbViewModel();
+                    breadcrumb.PageName = "İhtiyaç Detay";
+                    breadcrumb.Items.Add("Anasayfa", "/");
+                    breadcrumb.Items.Add("İhtiyaç Listesi", "/Tenders");
+                    breadcrumb.Items.Add(tender.ShortDescription, "");
+                    TempData["Breadcrumb"] = breadcrumb;
+
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return View(model);
+
+        }
+
+        [Route("{id}/edit")]
+        public ActionResult Edit(int id)
+        {
+            var model = new TenderViewModel()
+            {
+                CurrentOrganization = CurrentOrganization,
+                CurrentUser = CurrentUser
+            };
+
+            try
+            {
+                using (var ctx = new CoronaSupportPlatformDbContext())
+                {
+                    // Get the tender
+                    var tender = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
+
+                    #region [ Authorization ]
+
+                    if (!User.IsInRole("Administrator"))
+                    {
+                        // Check the owner
+                        if (tender.UserId != UserId)
+                        {
+                            Response.Redirect("/not-authorized");
+                        }
+                    }
+
+                    #endregion
+
+                    // Fill the model
+                    model.From(tender);
+
+                    #region [ Breadcrumb ]
+
+                    var breadcrumb = new BreadcrumbViewModel();
+                    breadcrumb.PageName = "İhtiyaç Detay";
+                    breadcrumb.Items.Add("Anasayfa", "/");
+                    breadcrumb.Items.Add("İhtiyaç Listesi", "/Tenders");
+                    breadcrumb.Items.Add(tender.ShortDescription, "");
+                    TempData["Breadcrumb"] = breadcrumb;
+
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return View(model);
+
+        }
+
+        [HttpPost,Route("{id}/edit")]
+        public ActionResult Edit(int id, TenderViewModel model)
+        {
+            try
+            {
+                using (var ctx = new CoronaSupportPlatformDbContext())
+                {
+                    // Get the tender
+                    var tender = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
+
+                    #region [ Authorization ]
+
+                    if (!User.IsInRole("Administrator"))
+                    {
+                        // Check the owner
+                        if (tender.UserId != UserId)
+                        {
+                            Response.Redirect("/not-authorized");
+                        }
+                    }
+
+                    #endregion
+
+                    // Update the tender
+                    tender.Address = model.Address;
+                    tender.LongDescription = model.LongDescription;
+
+                    // Update tender items
+                    foreach(var item in tender.Items)
+                    {
+                        // Get the related quantity
+                        var updatedQuantity = Convert.ToInt32(Request.Form[item.ItemId + "_Quantity"]);
+                        item.Quantity = updatedQuantity;
+                    }
+
+                    // Save changes
+                    ctx.SaveChanges();
+
+                    // Fill the model
+                    model.From(tender);
+
+                    // Set the update flag
+                    model.IsUpdated = true;
+
+                    #region [ Breadcrumb ]
+
+                    var breadcrumb = new BreadcrumbViewModel();
+                    breadcrumb.PageName = "İhtiyaç Güncelle";
+                    breadcrumb.Items.Add("Anasayfa", "/");
+                    breadcrumb.Items.Add("İhtiyaç Listesi", "/Tenders");
+                    breadcrumb.Items.Add(tender.ShortDescription, "");
+                    TempData["Breadcrumb"] = breadcrumb;
+
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return View(model);
+
         }
     }
 }

@@ -29,6 +29,9 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
         [Required(ErrorMessage = "Talebe ait mesaj giriniz")]
         public string LongDescription { get; set; }
 
+        [Required(ErrorMessage = "Talebin teslim edilmesini istediğiniz adresi giriniz")]
+        public string Address { get; set; }
+
 
         public TenderState State { get; set; }
 
@@ -73,6 +76,8 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
 
         public EntityStatus Status { get; set; }
 
+        public bool IsUpdated { get; set; }
+
         #region [ Navigation properties ]
 
 
@@ -103,6 +108,7 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
             this.RefNumber = tender.RefNumber;
             this.UserId = tender.UserId;
             this.State = tender.State;
+            this.Address = tender.Address;
             this.Created = tender.Created.ToLocalTime();
             this.Updated = tender.Updated.GetValueOrDefault().ToLocalTime();
             this.Status = tender.Status;
@@ -110,6 +116,10 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
             // Set the organization
             this.OrganizationId = tender.OrganizationId;
             this.Organization = tender.Organization;
+
+            // Set the user
+            this.UserId = tender.UserId;
+            this.User = tender.User;
 
             // Set the items
             this.Items = tender.Items;

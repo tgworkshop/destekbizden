@@ -29,8 +29,9 @@
                                             <thead class="bg-primary">
                                                 <tr class="text-white">
                                                     <td style="width:10%">İhtiyaç ID</td>
-                                                    <td style="width:15%">Giriş Tarihi</td>
-                                                    <td style="width:25%">Hastane</td>
+                                                    <td style="width:10%">Giriş Tarihi</td>
+                                                    <td style="width:10%">Kullanıcı</td>
+                                                    <td style="width:20%">Hastane</td>
                                                     <td style="width:30%">Ürünler</td>
                                                     <td style="width:10%">Durum</td>
                                                     <td style="width:10%"></td>
@@ -39,24 +40,25 @@
                                             <tbody>
                                                 @foreach (var tender in Model.Tenders.Where(t => t.State == CoronaSupportPlatform.Models.TenderState.New || t.State == CoronaSupportPlatform.Models.TenderState.Active).OrderByDescending(t => t.Created))
                                                 {
-                                                    <tr>
-                                                        <td style="width:10%">@tender.TenderId</td>
-                                                        <td style="width:15%">@tender.Created.ToString("dd.MM.yyyy HH:mm")</td>
-                                                        <td style="width:25%">@(tender.Organization?.Name)</td>
-                                                        <td style="width:30%">
-                                                            @foreach (var item in tender.Items)
-                                                            {
-                                                                <div class="row">
-                                                                    <div class="col-6">@(item.Product?.Name)</div>
-                                                                    <div class="col-6">@item.Quantity adet</div>
-                                                                </div>
-                                                            }
-                                                        </td>
-                                                        <td style="width:10%">@tender.StateName</td>
-                                                        <td style="width:10%">
-                                                            @*<button onclick="document.location.href='/Tenders/@tender.TenderId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>*@
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td style="width:10%">@tender.TenderId</td>
+                                                    <td style="width:10%">@tender.Created.ToString("dd.MM.yyyy HH:mm")</td>
+                                                    <td style="width:10%"><a href="/Users/@tender.UserId">@(tender.User?.Firstname + " " + tender.User?.Lastname)</a></td>
+                                                    <td style="width:20%">@(tender.Organization?.City + " " + tender.Organization?.Name)</td>
+                                                    <td style="width:30%">
+                                                        @foreach (var item in tender.Items)
+                                                        {
+                                                            <div class="row">
+                                                                <div class="col-6">@(item.Product?.Name)</div>
+                                                                <div class="col-6">@item.Quantity adet</div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                    <td style="width:10%">@tender.StateName</td>
+                                                    <td style="width:10%">
+                                                        <button onclick="document.location.href='/Tenders/@tender.TenderId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>
+                                                    </td>
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>
