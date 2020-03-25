@@ -36,13 +36,13 @@ namespace CoronaSupportPlatform.UI.Controllers
                 if (User.IsInRole("Administrator"))
                 {
                     // Load all tenders if administrator
-                    var tenders = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").Include("Properties").Include("Tags").ToList();
+                    var tenders = ctx.Tenders.Include("User.Roles").Include("Organization").Include("Items.Product").Include("Properties").Include("Tags").ToList();
                     model.Tenders = tenders.Select(t => new TenderViewModel().From(t)).ToList();
                 }
                 else
                 {
                     // Load only the tenders for the current user
-                    var tenders = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").Include("Properties").Include("Items").Where(u => u.UserId == CurrentUser.Id).ToList();
+                    var tenders = ctx.Tenders.Include("User.Roles").Include("Organization").Include("Items.Product").Include("Properties").Include("Items").Where(u => u.UserId == CurrentUser.Id).ToList();
                     model.Tenders = tenders.Select(t => new TenderViewModel().From(t)).ToList();
                 }
             }
@@ -215,7 +215,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                 using (var ctx = new CoronaSupportPlatformDbContext())
                 {
                     // Get the tender
-                    var tender = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
+                    var tender = ctx.Tenders.Include("User.Roles").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
 
                     #region [ Authorization ]
 
@@ -269,7 +269,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                 using (var ctx = new CoronaSupportPlatformDbContext())
                 {
                     // Get the tender
-                    var tender = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
+                    var tender = ctx.Tenders.Include("User.Roles").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
 
                     #region [ Authorization ]
 
@@ -316,7 +316,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                 using (var ctx = new CoronaSupportPlatformDbContext())
                 {
                     // Get the tender
-                    var tender = ctx.Tenders.Include("User").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
+                    var tender = ctx.Tenders.Include("User.Roles").Include("Organization").Include("Items.Product").FirstOrDefault(t => t.TenderId == id);
 
                     #region [ Authorization ]
 

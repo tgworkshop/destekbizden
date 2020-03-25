@@ -231,6 +231,10 @@
     <Content Include="Content\images\media\media1.jpg" />
     <Content Include="Content\images\media\media2.jpg" />
     <Content Include="Content\images\products\1.jpg" />
+    <Content Include="Content\images\products\2.jpg" />
+    <Content Include="Content\images\products\3.jpg" />
+    <Content Include="Content\images\products\4.jpg" />
+    <Content Include="Content\images\products\5.jpg" />
     <Content Include="Content\js\bar-chart.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.slicknav.min.js" />

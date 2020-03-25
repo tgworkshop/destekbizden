@@ -51,7 +51,7 @@
                                 @foreach (var product in Model.Products)
                                 {
                                     <div class="col-sm-8 p-3 mb-1" style="border:solid 1px lightgray">
-                                        <img src="~/Content/images/products/@(product.ProductId).jpg" style="width:50px" /> @product.Name
+                                        <img src="~/Content/images/products/@(product.Code).jpg" style="width:50px" /> @product.Name @Html.Raw(product.ShortDescription)
                                     </div>
                                     <div class="col-sm-4 p-2 mb-1" style="border:solid 1px lightgray">
                                         <br />

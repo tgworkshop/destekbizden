@@ -83,6 +83,10 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels
         [Display(Name = "Hastane")] 
         public int? OrganizationId { get; set; }
 
+        [Required(ErrorMessage = "Departman seçimi zorunludur.")]
+        [Display(Name = "Departman")]
+        public string Department { get; set; }
+
         [Required(ErrorMessage = "E-Posta alanı zorunludur.")]
         [EmailAddress]
         [Display(Name = "Email")]

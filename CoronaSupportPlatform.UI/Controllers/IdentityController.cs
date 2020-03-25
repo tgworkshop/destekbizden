@@ -110,6 +110,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                         // Load the user role
                         var userRole = ctx.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id && ur.RoleId == roleId);
                         userRole.OrganizationId = Convert.ToInt32(model.OrganizationId);
+                        userRole.Data = model.Department;
                         ctx.SaveChanges();
                     }
 

@@ -96,6 +96,21 @@
                             </select>
                         </div>
                         <div class="form-gp">
+                            <select name="Department" class="custom-select">
+                                <option value="">Departman seçiniz</option>
+                                @{
+                                    var departmentList = new List<string> { "Acil Servis", "Yoğun Bakım", "Kadın Hastalıkları ve Doğum", "Çocuk Yoğun Bakım/Acil",
+                                                                                "Göğüs Hastalıkları", "Dahiliye", "Anestezi", "Radyoloji", "Kulak-Burun-Boğaz", "Psikiyatri", 
+                                                                                    "Pediatri"};
+                                }
+                                @foreach (var department in departmentList.OrderBy(d => d))
+                                {
+                                    <option value="@department" @(department == Model.Department ? "selected" : "")>@department</option>
+                                }
+                                <option value="Diğer" @("Diğer" == Model.Department ? "selected" : "")>Diğer</option>
+                            </select>
+                        </div>
+                        <div class="form-gp">
                             <label for="txtEmail">E-posta adresiniz<span style="color:red">*</span></label>
                             <input type="email" id="txtEmail" name="Email" value="@Model.Email">
                             <i class="ti-email"></i>

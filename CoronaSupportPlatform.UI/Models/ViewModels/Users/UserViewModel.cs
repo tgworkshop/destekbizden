@@ -24,6 +24,8 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Users
 
         public string OrganizationName { get; set; }
 
+        public string Department { get; set; }
+
         public string Email { get; set; }
 
         public string Mobile { get; set; }
@@ -51,6 +53,7 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Users
             // Set the role
             this.OccupationId = user.Roles?.FirstOrDefault().RoleId;
             this.Occupation = roleList.FirstOrDefault(r => r.Id == user.Roles?.FirstOrDefault().RoleId)?.Name;
+            this.Department = user.Roles?.FirstOrDefault().Data;
 
             return this;
         }

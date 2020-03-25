@@ -8,7 +8,13 @@
             occupation = "Yönetici";
             break;
         case 2:
-            occupation = "Hastane Yetkilisi";
+            occupation = "Diğer Sağlık Personeli";
+            break;
+        case 1004:
+            occupation = "Doktor";
+            break;
+        case 1005:
+            occupation = "İdari Personel";
             break;
     }
 
@@ -67,28 +73,30 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-2">
+                                <strong>Departman</strong>
+                            </div>
+                            <div class="col-4">
+                                @Model.Department
+                            </div>
+                            <div class="col-2">
                                 <strong>E-posta</strong>
                             </div>
                             <div class="col-4">
                                 <a href="mailto:@Model.Email">@Model.Email</a>
                             </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-2">
                                 <strong>Cep Telefonu</strong>
                             </div>
                             <div class="col-4">
                                 @Model.Mobile
                             </div>
-                        </div>
-                        <div class="row mb-3">
                             <div class="col-2">
                                 <strong>Durum</strong>
                             </div>
                             <div class="col-4">
                                 @status
-                            </div>
-                            <div class="col-2">
-                            </div>
-                            <div class="col-4">
                             </div>
                         </div>
                         <div class="row">

@@ -157,11 +157,14 @@ namespace CoronaSupportPlatform.UI.Controllers
                             userRole.OrganizationId = (int?)null;
                             userRole.RoleId = 1;
                             break;
-                        case 2:
+                        default:
                             userRole.OrganizationId = model.OrganizationId;
-                            userRole.RoleId = 2;
+                            userRole.RoleId = model.OccupationId.GetValueOrDefault();
                             break;
                     }
+
+                    // Set the department
+                    userRole.Data = model.Department;
 
                     ctx.SaveChanges();
 

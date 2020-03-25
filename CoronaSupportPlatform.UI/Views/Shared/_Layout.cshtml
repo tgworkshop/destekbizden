@@ -14,13 +14,15 @@
     <link rel="stylesheet" href="/content/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/content/css/slicknav.min.css">
 
+    @RenderSection("headPlugins", required: false)
+
     <!-- others css -->
     <link rel="stylesheet" href="/content/css/typography.css">
     <link rel="stylesheet" href="/content/css/default-css.css">
     <link rel="stylesheet" href="/content/css/styles.css">
     <link rel="stylesheet" href="/content/css/responsive.css">
 
-    @RenderSection("head", required: false)
+    @RenderSection("headEnd", required: false)
 
     <!-- modernizr css -->
     <script src="/content/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -37,22 +39,20 @@
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="page-container">
-        
+
         <!-- sidebar menu area start -->
         @Html.Action("Sidebar", "Common")
         <!-- sidebar menu area end -->
-
         <!-- main content area start -->
         <div class="main-content">
             <!-- header area start -->
-            @Html.Action("Header", "Common")            
+            @Html.Action("Header", "Common")
             <!-- header area end -->
 
             @RenderBody()
 
         </div>
         <!-- main content area end -->
-        
         <!-- footer area start-->
         @Html.Action("Footer", "Common")
         <!-- footer area end-->
@@ -69,11 +69,13 @@
     <script src="/content/js/jquery.slimscroll.min.js"></script>
     <script src="/content/js/jquery.slicknav.min.js"></script>
 
+    @RenderSection("scriptPlugins", required: false)
+
     <!-- others plugins -->
     <script src="/content/js/plugins.js"></script>
     <script src="/content/js/scripts.js"></script>
 
-    @RenderSection("scripts", required: false)
+    @RenderSection("scriptsEnd", required: false)
 
 </body>
 

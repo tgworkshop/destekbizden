@@ -60,26 +60,43 @@
                                         <option value="1" @(((short)Model.OccupationId) == 1 ? "selected" : "")>Yönetici</option>
                                         <option value="2" @(((short)Model.OccupationId) == 2 ? "selected" : "")>Diğer Sağlık Personeli</option>
                                         <option value="4" @(((short)Model.OccupationId) == 4 ? "selected" : "")>Kullanıcı</option>
-                                        <option value="1004" @(((short)Model.OccupationId) == 4 ? "selected" : "")>Doktor</option>
-                                        <option value="1005" @(((short)Model.OccupationId) == 4 ? "selected" : "")>İdari Personel</option>
+                                        <option value="1004" @(((short)Model.OccupationId) == 1004 ? "selected" : "")>Doktor</option>
+                                        <option value="1005" @(((short)Model.OccupationId) == 1005 ? "selected" : "")>İdari Personel</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3 form-gp">
                                 <div class="col-2">
+                                    <strong>Departman</strong>
+                                </div>
+                                <div class="col-4">
+                                    @{
+                                        var departmentList = new List<string> { "Acil Servis", "Yoğun Bakım", "Kadın Hastalıkları ve Doğum", "Çocuk Yoğun Bakım/Acil",
+                                                                                "Göğüs Hastalıkları", "Dahiliye", "Anestezi", "Radyoloji", "Kulak-Burun-Boğaz", "Psikiyatri",
+                                                                                    "Pediatri"};
+                                    }
+                                    <select name="Department" class="custom-select">
+                                        @foreach (var department in departmentList.OrderBy(d => d))
+                                        {
+                                            <option value="@department" @(department == Model.Department ? "selected" : "")>@department</option>
+                                        }
+                                        <option value="Diğer" @("Diğer" == Model.Department ? "selected" : "")>Diğer</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
                                     <strong>E-posta</strong>
                                 </div>
                                 <div class="col-4">
                                     <input type="text" name="Email" value="@Model.Email" />
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-2">
                                     <strong>Cep Telefonu</strong>
                                 </div>
                                 <div class="col-4">
                                     <input type="text" name="Mobile" value="@Model.Mobile" />
                                 </div>
-                            </div>
-                            <div class="row mb-3">
                                 <div class="col-2">
                                     <strong>Durum</strong>
                                 </div>
@@ -89,10 +106,6 @@
                                         <option value="1" @(((short)Model.Status) == 1 ? "selected" : "")>Aktif</option>
                                         <option value="-1" @(((short)Model.Status) == -1 ? "selected" : "")>Pasif</option>
                                     </select>
-                                </div>
-                                <div class="col-2">
-                                </div>
-                                <div class="col-4">
                                 </div>
                             </div>
                             <div class="row">

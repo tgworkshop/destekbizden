@@ -24,7 +24,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var user in Model.Users)
+                                        @foreach (var user in Model.Users.OrderByDescending(u => u.UserId))
                                         {
                                             var occupation = "";
                                             switch (user.OccupationId.GetValueOrDefault())

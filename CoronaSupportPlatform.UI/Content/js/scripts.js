@@ -96,13 +96,13 @@
     /*================================
     datatable active
     ==================================*/
-    if ($('#dataTable').length) {
-        $('#dataTable').DataTable({
+    if ($('#tblPending').length) {
+        $('#tblPending').DataTable({
             responsive: true
         });
     }
-    if ($('#dataTable2').length) {
-        $('#dataTable2').DataTable({
+    if ($('#tblClosed').length) {
+        $('#tblClosed').DataTable({
             responsive: true
         });
     }
