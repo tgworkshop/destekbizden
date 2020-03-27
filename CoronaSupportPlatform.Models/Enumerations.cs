@@ -40,4 +40,20 @@ namespace CoronaSupportPlatform.Models
         [Display(Name = "Karşılanamadı")]
         Not_Supplied = 3
     }
+
+    // ORGANIZATIONS
+    public enum OrganizationType
+    {
+        [Display(Name = "Bireysel")]
+        None = 0,
+
+        [Display(Name = "Hastane")]
+        Hospital = 10,
+
+        [Display(Name = "İl Sağlık Müdürlüğü")]
+        RegionalHealthAdministration = 11,
+
+        [Display(Name = "Tedarikçi")]
+        Supplier = 20
+    }
 }

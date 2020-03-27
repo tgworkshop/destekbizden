@@ -168,11 +168,14 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\TendersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data\TenderProductQuantity.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
     <Compile Include="Models\ViewModels\Common\BreadcrumbViewModel.cs" />
     <Compile Include="Models\ViewModels\Common\SidebarViewModel.cs" />
@@ -186,6 +189,11 @@
     <Compile Include="Models\ViewModels\Notifications\TenderNotificationViewModel.cs" />
     <Compile Include="Models\ViewModels\Notifications\RegistrationNotificationViewModel.cs" />
     <Compile Include="Models\ViewModels\Notifications\ResetPasswordNotificationViewModel.cs" />
+    <Compile Include="Models\ViewModels\Organizations\OrganizationListViewModel.cs" />
+    <Compile Include="Models\ViewModels\Organizations\OrganizationViewModel.cs" />
+    <Compile Include="Models\ViewModels\Reports\OrganizationReportsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Reports\CityReportsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Reports\ProductReportsViewModel.cs" />
     <Compile Include="Models\ViewModels\Users\UserListViewModel.cs" />
     <Compile Include="Models\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Models\ViewModels\Tenders\TenderViewModel.cs" />
@@ -235,6 +243,7 @@
     <Content Include="Content\images\products\3.jpg" />
     <Content Include="Content\images\products\4.jpg" />
     <Content Include="Content\images\products\5.jpg" />
+    <Content Include="Content\js\product-reports.js" />
     <Content Include="Content\js\bar-chart.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.slicknav.min.js" />
@@ -274,7 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CoronaSupport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config" />
@@ -303,6 +311,13 @@
     </Content>
     <Content Include="Views\Error\NotAuthorized.cshtml" />
     <Content Include="Views\Tenders\Edit.cshtml" />
+    <Content Include="Views\Reports\Products.cshtml" />
+    <Content Include="Views\Reports\Organizations.cshtml" />
+    <Content Include="Views\Organizations\Details.cshtml" />
+    <Content Include="Views\Organizations\Edit.cshtml" />
+    <Content Include="Views\Organizations\Index.cshtml" />
+    <Content Include="Views\Organizations\New.cshtml" />
+    <Content Include="Views\Reports\Cities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoronaSupportPlatform.Common\CoronaSupportPlatform.Common.csproj">

@@ -89,7 +89,16 @@
                             @*<label for="ddlOrganization">Hastane</label>*@
                             <select name="OrganizationId" class="custom-select">
                                 <option value="">Hastanenizi seçiniz</option>
-                                @foreach (var organization in Model.Organizations.OrderBy(o => o.City).ThenBy(o => o.Name))
+                                <option value="1063">BİREYSEL TALEP</option>
+                                @{ 
+                                    // Get all organizations
+                                    var organizations = Model.Organizations.OrderBy(o => o.City).ThenBy(o => o.Name).ToList();
+
+                                    // Remove the selection for individuals
+                                    organizations.RemoveAll(o => o.OrganizationId == 1063);
+                                }
+
+                                @foreach (var organization in organizations)
                                 {
                                     <option value="@organization.OrganizationId" @(organization.OrganizationId == Model.OrganizationId ? "selected" : "")>@(organization.City + " " + organization.Name)</option>
                                 }

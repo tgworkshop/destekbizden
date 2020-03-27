@@ -22,7 +22,7 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
 
         public int? OrganizationId { get; set; }
 
-        [Required(ErrorMessage = "Talep adını giriniz.")]
+        //[Required(ErrorMessage = "Talep adını giriniz.")]
         public string ShortDescription { get; set; }
 
 
@@ -65,9 +65,6 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
 
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "En az bir ürüne ait adet bilgisi giriniz.")]
-        public string ProductQuantities { get; set; }
-        
         public List<Product> Products { get; set; } = new List<Product>();
 
         public DateTime Created { get; set; }

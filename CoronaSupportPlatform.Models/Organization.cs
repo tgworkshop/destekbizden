@@ -12,9 +12,13 @@ namespace CoronaSupportPlatform.Models
 
         public string Name { get; set; }
 
+        public OrganizationType Type { get; set; }
+
         public string District { get; set; }
 
         public string City { get; set; }
+
+        public string Region { get; set; }
 
         public string ShortDescription { get; set; }
 

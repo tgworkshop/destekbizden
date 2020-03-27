@@ -1,0 +1,99 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Organizations.OrganizationViewModel
+@{
+    ViewBag.Title = "Organizasyon Detay";
+}
+@section headPlugins{
+    <!-- Start datatable css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+}
+<div class="main-content-inner">
+    <div class="mt-5 mb-5">
+        <div class="col-lg-12 mt-sm-30 mt-xs-30">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mt-4">
+                        <div class="row mb-3 form-gp">
+                            <div class="col-12">
+                                <strong>Organizasyon Adı</strong>
+                                <br />
+                                @Model.Name
+                            </div>
+                        </div>
+                        <div class="row mb-3 form-gp">
+                            <div class="col-6">
+                                <strong>Şehir</strong>
+                                <br />
+                                @(Model.City)
+                            </div>
+                            <div class="col-6">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="data-tables datatable-primary">
+                                    <table id="tblOrganizationTenders" class="text-center">
+                                        <thead class="text-capitalize">
+                                            <tr>
+                                                <td style="width:5%">ID</td>
+                                                <td style="width:10%">Giriş Tarihi</td>
+                                                <td style="width:10%">Kullanıcı</td>
+                                                <td style="width:20%">Hastane</td>
+                                                <td style="width:10%">Bölüm</td>
+                                                <td style="width:25%">Ürünler</td>
+                                                <td style="width:10%">Durum</td>
+                                                <td style="width:10%"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var tender in Model.Tenders.OrderByDescending(t => t.Created))
+                                            {
+                                                <tr>
+                                                    <td style="width:5%">@tender.TenderId</td>
+                                                    <td style="width:10%">@tender.Created.ToString("dd.MM.yyyy HH:mm")</td>
+                                                    <td style="width:10%"><a href="/Users/@tender.UserId">@(tender.User?.Firstname + " " + tender.User?.Lastname)</a></td>
+                                                    <td style="width:20%">@(tender.Organization?.City + " " + tender.Organization?.Name)</td>
+                                                    <td style="width:10%">@(tender.User.Roles.FirstOrDefault().Data)</td>
+                                                    <td style="width:25%">
+                                                        @foreach (var item in tender.Items)
+                                                        {
+                                                            <div class="row">
+                                                                <div class="col-6">@(item.Product?.Name)</div>
+                                                                <div class="col-6">@item.Quantity adet</div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                    <td style="width:10%">@tender.StateName</td>
+                                                    <td style="width:10%">
+                                                        <button onclick="document.location.href='/Tenders/@tender.TenderId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-warning mb-1 pull-right" onclick="document.location.href = '/Organizations/@Model.OrganizationId/Edit';">Güncelle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scriptPlugins{
+    <!-- Start datatable js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+}

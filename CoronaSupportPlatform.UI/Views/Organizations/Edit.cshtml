@@ -1,11 +1,10 @@
-﻿@using System.Linq;
-@model CoronaSupportPlatform.UI.Models.ViewModels.Tenders.TenderViewModel
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Tenders.TenderViewModel
 @{
-    ViewBag.Title = "Yeni İhtiyaç";
+    ViewBag.Title = "İhtiyaç Güncelle";
 }
 
 <div class="main-content-inner">
-    @using (Html.BeginForm("New", "Tenders", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "editForm", role = "form" }))
+    @using (Html.BeginForm("Edit", "Tenders", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "editForm", role = "form" }))
     {
         @Html.HiddenFor(o => Model.CurrentOrganization.OrganizationId)
 
@@ -14,6 +13,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="mt-4">
+                            @if (Model.IsUpdated)
+                            {
+                                <div class="row alert alert-success alert-dismissible fade show" role="alert">
+                                    <ul>
+                                        <li>İhtiyaç başarıyla güncellendi.</li>
+                                    </ul>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span class="fa fa-times"></span>
+                                    </button>
+                                </div>
+                            }
+
                             @if (Model.Errors.Any())
                             {
                                 <div class="row alert alert-danger alert-dismissible fade show" role="alert">
@@ -32,14 +43,21 @@
                                 <div class="col-12">
                                     <strong>Talep Adı</strong>
                                     <br />
-                                    <input type="text" name="ShortDescription" value="@Model.ShortDescription" />
+                                    <input type="text" name="ShortDescription" value="" />
                                 </div>
                             </div>
                             <div class="row mb-3 form-gp">
-                                <div class="col-12">
+                                <div class="col-6">
+                                    <strong>Kullanıcı</strong>
+                                    <br />
+                                    <a href="/Users/@Model.UserId" target="_blank">
+                                        @(Model.User.Firstname + " " + Model.User.Lastname)
+                                    </a>
+                                </div>
+                                <div class="col-6">
                                     <strong>Hastane</strong>
                                     <br />
-                                    @(Model.CurrentOrganization?.Name)
+                                    @(Model.Organization.Name)
                                 </div>
                             </div>
                             <div class="row mb-3 form-gp">
@@ -48,24 +66,15 @@
                                     <br />
                                 </div>
                             </div>
-                            @if (Model.CurrentOrganization.OrganizationId == 1063)
-                            {
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span style="color:red">Bireysel başvurularda her üründen en fazla 5 adet talep edebilirsiniz!</span>
-                                        <br /><br />
-                                    </div>
-                                </div>
-                            }
                             <div class="row form-gp ml-0">
-                                @foreach (var product in Model.Products)
+                                @foreach (var item in Model.Items)
                                 {
                                     <div class="col-sm-8 p-3 mb-1" style="border:solid 1px lightgray">
-                                        <img src="~/Content/images/products/@(product.Code).jpg" style="width:50px" /> @product.Name @Html.Raw(product.ShortDescription)
+                                        <img src="~/Content/images/products/@(item.ProductId).jpg" style="width:50px" /> @item.Product.Name
                                     </div>
                                     <div class="col-sm-4 p-2 mb-1" style="border:solid 1px lightgray">
                                         <br />
-                                        <input name="@(product.ProductId)_Quantity" class="input-group-text" style="background-color:white" placeholder="Adet" type="number" id="Product_@product.ProductId" value="@(Request.Form.AllKeys.Contains(product.ProductId + "_Quantity") ? Request.Form[product.ProductId + "_Quantity"] : "0" )" />
+                                        <input name="@(item.ItemId)_Quantity" class="input-group-text" style="background-color:white" placeholder="Adet" type="number" id="@item.ItemId)_Quantity" value="@item.Quantity" />
                                     </div>
                                 }
                             </div>

@@ -120,6 +120,10 @@
     <Compile Include="Migrations\202003242041026_DB-Improvement-TenderAddresses.designer.cs">
       <DependentUpon>202003242041026_DB-Improvement-TenderAddresses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003272126354_DB-Improvement-OrganizationTypeAndRegion.cs" />
+    <Compile Include="Migrations\202003272126354_DB-Improvement-OrganizationTypeAndRegion.designer.cs">
+      <DependentUpon>202003272126354_DB-Improvement-OrganizationTypeAndRegion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="OrganizationProperty.cs" />
@@ -165,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003242041026_DB-Improvement-TenderAddresses.resx">
       <DependentUpon>202003242041026_DB-Improvement-TenderAddresses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003272126354_DB-Improvement-OrganizationTypeAndRegion.resx">
+      <DependentUpon>202003272126354_DB-Improvement-OrganizationTypeAndRegion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

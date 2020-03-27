@@ -103,6 +103,13 @@ namespace CoronaSupportPlatform.UI.Controllers
         {
             try
             {
+                #region [ Basic values ]
+
+                model.CurrentUser = CurrentUser;
+                model.CurrentOrganization = CurrentOrganization;
+
+                #endregion
+
                 #region [ Load the create page data  ]
 
                 using (var ctx = new CoronaSupportPlatformDbContext())
@@ -134,53 +141,73 @@ namespace CoronaSupportPlatform.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new CoronaSupportPlatformDbContext())
+                    // Create the tender items
+                    var tenderItems = new List<TenderItem>();
+
+                    for (int i = 0; i < model.Products.Count; i++)
                     {
-                        // Create new tender object
-                        var tender = new Tender()
+                        // Get the current product
+                        var product = model.Products[i];
+
+                        // Check for quantity
+                        var quantity = Convert.ToInt32(Request.Form[product.ProductId + "_Quantity"]);
+
+                        // Check for a positive quantity
+                        if (quantity == 0) continue;
+
+                        tenderItems.Add(new TenderItem()
                         {
-                            OrganizationId = model.Organization.OrganizationId,
-                            ShortDescription = model.ShortDescription,
-                            LongDescription = model.LongDescription,
-                            Address = model.Address,
-                            UserId = CurrentUser.Id,
-                            Created = DateTime.UtcNow,
-                            State = TenderState.New,
-                            Status = Common.EntityStatus.Active,
-                        };
+                            ProductId = product.ProductId,
+                            Quantity = quantity,
+                            State = TenderItemState.New,
+                            Created = DateTime.UtcNow
+                        });
+                    }
 
-                        // Get the quantities
-                        var quantityList = Request.Form["ProductQuantities"].Split(',');
-
-                        // Create the tender items
-                        var tenderItems = new List<TenderItem>();
-
-                        for (int i = 0; i < model.Products.Count; i++)
+                    // Check for product quantities
+                    if (CurrentOrganization.OrganizationId == 1063) // Organization selection for individuals
+                    {
+                        // Check for limits
+                        if (tenderItems.Any(ti => ti.Quantity > 5))
                         {
-                            // Check for quantity
-                            var quantity = Convert.ToInt32(quantityList[i]);
-
-                            // Check for a positive quantity
-                            if (quantity == 0) continue;
-
-                            // Get the current product
-                            var product = model.Products[i];
-
-                            tenderItems.Add(new TenderItem()
-                            {
-                                ProductId = product.ProductId,
-                                Quantity = quantity,
-                                State = TenderItemState.New,
-                                Created = DateTime.UtcNow
-                            });
+                            model.Errors.Add("Bireysel başvuru yapıyor olmanıza rağmen bazı ürünleri 5 adetten fazla talep ettiniz!");
                         }
+                    }
 
-                        // Add the tender items to tender
-                        tender.Items = tenderItems;
+                    // Check for 0 tender
+                    if (tenderItems.Sum(ti => ti.Quantity) == 0)
+                    {
+                        model.Errors.Add("Hiç bir ürün için adet girmediniz!");
+                    }
 
-                        // Add the tender
-                        ctx.Tenders.Add(tender);
-                        ctx.SaveChanges();
+                    if (!model.Errors.Any())
+                    {
+                        using (var ctx = new CoronaSupportPlatformDbContext())
+                        {
+                            // Create new tender object
+                            var tender = new Tender()
+                            {
+                                OrganizationId = model.Organization.OrganizationId,
+                                ShortDescription = model.ShortDescription,
+                                LongDescription = model.LongDescription,
+                                Address = model.Address,
+                                UserId = CurrentUser.Id,
+                                Created = DateTime.UtcNow,
+                                State = TenderState.New,
+                                Status = Common.EntityStatus.Active,
+                            };
+
+                            // Add the tender items to tender
+                            tender.Items = tenderItems;
+
+                            // Add the tender
+                            ctx.Tenders.Add(tender);
+                            ctx.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        return View(model);
                     }
                 }
                 else

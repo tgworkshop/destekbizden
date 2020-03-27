@@ -103,15 +103,21 @@
     }
     if ($('#tblClosed').length) {
         $('#tblClosed').DataTable({
-            responsive: true
+            responsive: true,
         });
     }
-    if ($('#dataTable3').length) {
-        $('#dataTable3').DataTable({
-            responsive: true
+    if ($('#tblOrganizationTenders').length) {
+        $('#tblOrganizationTenders').DataTable({
+            responsive: true,
+            "order": []
         });
     }
-
+    if ($('#tblOrganizations').length) {
+        $('#tblOrganizations').DataTable({
+            responsive: true,
+            "order": []
+        });
+    }
 
     /*================================
     Slicknav mobile menu

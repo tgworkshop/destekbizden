@@ -1,0 +1,81 @@
+﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Reports.OrganizationReportsViewModel
+@{
+    ViewBag.Title = "Hastane Raporları";
+}
+@section headPlugins{
+    <!-- Start datatable css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+}
+<div class="main-content-inner">
+    <div class="mt-5 mb-5">
+        <div class="col-lg-12 mt-sm-30 mt-xs-30">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-between align-items-center">
+                        <h4 class="header-title">Hastane Raporları</h4>
+                    </div>
+                    <div class="trad-history mt-4">
+                        <div class="data-tables datatable-primary">
+                            <table id="tblOrganizationTenders" class="text-center">
+                                <thead class="text-capitalize">
+                                    <tr>
+                                        <td style="width:5%">ID</td>
+                                        <td style="width:45%">Hastane</td>
+                                        <td style="width:5%">Talep Sayısı</td>
+                                        <td style="width:35%">Ürünler</td>
+                                        <td style="width:10%"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var organization in Model.Organizations.OrderByDescending(o =>
+                                    {
+                                        var items = o.Tenders.SelectMany(t => t.Items).ToList();
+
+                                        var totalQuantity = items.Sum(i => i.Quantity);
+
+                                        return totalQuantity;
+                                    }))
+                                    {
+                                        var distincItems = organization.Tenders.SelectMany(t => t.Items).GroupBy(t => t.ProductId).Select(g => g.First()).ToList();
+
+                                        <tr>
+                                            <td style="width:5%">@organization.OrganizationId</td>
+                                            <td style="width:45%">@(organization.City + " " + organization.Name)</td>
+                                            <td style="width:5%">@(organization.Tenders.Count)</td>
+                                            <td style="width:35%">
+                                                @foreach (var item in distincItems)
+                                                {
+                                                    var relatedItems = organization.Tenders.SelectMany(t => t.Items).Where(i => i.ProductId == item.ProductId);
+
+                                                    <div class="row text-left" style="border:solid 1px whitesmoke;">
+                                                        <div class="col-6">@(item.Product?.Name)</div>
+                                                        <div class="col-6">@relatedItems.Sum(t => t.Quantity) adet</div>
+                                                    </div>
+                                                }
+                                            </td>
+                                            <td style="width:10%">
+                                                <button onclick="document.location.href='/Organizations/@organization.OrganizationId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scriptPlugins{
+    <!-- Start datatable js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+}

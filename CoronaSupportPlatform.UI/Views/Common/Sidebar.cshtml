@@ -36,6 +36,19 @@
                             <li><a href="/Tenders/New">Yeni İhtiyaç</a></li>
                         </ul>
                     </li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li @(path.Contains("Reports") ? "class=active" : "")>
+                            <a href="javascript:void(0)" aria-expanded="true">
+                                <i class="fa fa-bar-chart"></i><span>Raporlar</span>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="/Reports/Products">Ürün Raporları</a></li>
+                                <li><a href="/Reports/Organizations">Hastane Raporları</a></li>
+                                <li><a href="/Reports/Cities">Şehir Raporları</a></li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </nav>
         </div>

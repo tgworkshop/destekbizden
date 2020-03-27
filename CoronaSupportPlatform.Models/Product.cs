@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoronaSupportPlatform.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CoronaSupportPlatform.Models
 {
-    public class Product
+    public class Product : Entity
     {
         [Key]
         public int ProductId { get; set; }
