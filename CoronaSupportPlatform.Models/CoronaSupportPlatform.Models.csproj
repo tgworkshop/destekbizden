@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assignment.cs" />
     <Compile Include="Configuration\CacheConfig.cs" />
     <Compile Include="Configuration\ConfigRecord.cs" />
     <Compile Include="Configuration\ContextConfig.cs" />
@@ -124,6 +125,10 @@
     <Compile Include="Migrations\202003272126354_DB-Improvement-OrganizationTypeAndRegion.designer.cs">
       <DependentUpon>202003272126354_DB-Improvement-OrganizationTypeAndRegion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003272214010_DB-Improvement-Assignments.cs" />
+    <Compile Include="Migrations\202003272214010_DB-Improvement-Assignments.designer.cs">
+      <DependentUpon>202003272214010_DB-Improvement-Assignments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="OrganizationProperty.cs" />
@@ -136,6 +141,7 @@
     <Compile Include="TenderItem.cs" />
     <Compile Include="TenderItemProperty.cs" />
     <Compile Include="TenderItemTag.cs" />
+    <Compile Include="TenderLogEntry.cs" />
     <Compile Include="TenderProperty.cs" />
     <Compile Include="TenderTag.cs" />
     <Compile Include="UserProperty.cs" />
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003272126354_DB-Improvement-OrganizationTypeAndRegion.resx">
       <DependentUpon>202003272126354_DB-Improvement-OrganizationTypeAndRegion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003272214010_DB-Improvement-Assignments.resx">
+      <DependentUpon>202003272214010_DB-Improvement-Assignments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

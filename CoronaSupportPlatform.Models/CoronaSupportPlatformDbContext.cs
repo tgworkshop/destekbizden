@@ -129,6 +129,9 @@ namespace CoronaSupportPlatform.Models
         // TENDERS
         public DbSet<Tender> Tenders { get; set; }
 
+        // ASSIGNMENTS
+        public DbSet<Assignment> Assignments { get; set; }
+
         // LOCATIONS
         public DbSet<Location> Locations { get; set; }
 

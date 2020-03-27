@@ -39,9 +39,14 @@ namespace CoronaSupportPlatform.Models
 
         public virtual List<TenderItem> Items { get; set; } = new List<TenderItem>();
 
+        public virtual List<Assignment> Assignments { get; set; } = new List<Assignment>();
+        
         public virtual List<TenderProperty> Properties { get; set; } = new List<TenderProperty>();
 
         public virtual List<TenderTag> Tags { get; set; } = new List<TenderTag>();
+
+        public virtual List<TenderLogEntry> Log { get; set; } = new List<TenderLogEntry>();
+
 
         #endregion
     }

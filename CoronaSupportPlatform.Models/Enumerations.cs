@@ -41,6 +41,38 @@ namespace CoronaSupportPlatform.Models
         Not_Supplied = 3
     }
 
+    public enum TenderEventType
+    {
+        Created = 0,
+
+        Assigned = 1,
+
+        Accepted = 2,
+    }
+
+    // ASSIGNMENTS
+    public enum AssignmentState
+    {
+        [Display(Name = "Yeni")]
+        New = 0,
+
+        [Display(Name = "İşleme Alındı")]
+        InProgress = 1,
+
+        [Display(Name = "Üretimde")]
+        InProduction = 2,
+
+        [Display(Name = "Teslimatta")]
+        Delivery = 3,
+
+        [Display(Name = "Teslim Edildi")]
+        Delivered = 4,
+
+        [Display(Name = "İptal Edildi")]
+        Expired = -99,
+    }
+
+
     // ORGANIZATIONS
     public enum OrganizationType
     {

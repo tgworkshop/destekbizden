@@ -26,6 +26,8 @@ namespace CoronaSupportPlatform.Models
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 
+        public virtual List<Assignment> Assignments { get; set; } = new List<Assignment>();
+
         public virtual List<TenderItemProperty> Properties { get; set; } = new List<TenderItemProperty>();
 
         public virtual List<TenderItemTag> Tags { get; set; } = new List<TenderItemTag>();
