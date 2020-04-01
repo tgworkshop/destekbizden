@@ -1,10 +1,12 @@
 ﻿
 using CoronaSupportPlatform.Models;
 using CoronaSupportPlatform.UI.Models.ViewModels.Common;
+using CoronaSupportPlatform.UI.Models.ViewModels.Notifications;
 using CoronaSupportPlatform.UI.Models.ViewModels.Tenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -14,6 +16,8 @@ namespace CoronaSupportPlatform.UI.Controllers
     [RoutePrefix("tenders"), Authorize(Roles = "Administrator,SupplierUser,OrganizationAdminstrator,OrganizationUser,Doctor")]
     public class TendersController : BaseController
     {
+        private MailService mailService = new MailService();
+        
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
@@ -204,6 +208,22 @@ namespace CoronaSupportPlatform.UI.Controllers
                             ctx.Tenders.Add(tender);
                             ctx.SaveChanges();
                         }
+
+                        #region [ Notification ]
+
+                        var notificationModel = new TenderNotificationViewModel();
+
+                        // Create the notification email body
+                        var notificationBody = ViewToString("Tender", "~/Views/Templates/Email/TenderConfirmation.cshtml", notificationModel);
+
+                        // Create the recipient list
+                        var recipients = new Dictionary<string, string>();
+                        recipients.Add(CurrentUser.Email, CurrentUser.Firstname + " " + CurrentUser.Lastname);
+
+                        // Send the email
+                        mailService.SendEmail("Destekbizden - Talebiniz bize ulaştı!", "mailer@destekbizden.org", "Destekbizden", recipients, notificationBody);
+
+                        #endregion
                     }
                     else
                     {

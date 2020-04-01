@@ -216,3 +216,6 @@ ModelManifest.xml
 ConnectionStrings.config
 ConnectionStrings.Debug.config
 ConnectionStrings.Release.config
+AppSettings.config
+AppSettings.Debug.config
+AppSettings.Release.config

@@ -286,6 +286,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config" />
+    <Content Include="AppSettings.config" />
+    <Content Include="AppSettings.Debug.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
+    </Content>
+    <Content Include="AppSettings.Release.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Common\Header.cshtml" />
     <Content Include="Views\Common\Footer.cshtml" />
@@ -318,6 +325,7 @@
     <Content Include="Views\Organizations\Index.cshtml" />
     <Content Include="Views\Organizations\New.cshtml" />
     <Content Include="Views\Reports\Cities.cshtml" />
+    <Content Include="Views\Templates\Email\TenderConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoronaSupportPlatform.Common\CoronaSupportPlatform.Common.csproj">
@@ -327,6 +335,10 @@
     <ProjectReference Include="..\CoronaSupportPlatform.Models\CoronaSupportPlatform.Models.csproj">
       <Project>{58C77322-6B19-455B-A118-1111AE04A5CE}</Project>
       <Name>CoronaSupportPlatform.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoronaSupportPlatform\CoronaSupportPlatform.csproj">
+      <Project>{97935719-6bf8-4cf4-bd98-cf0b71a669cb}</Project>
+      <Name>CoronaSupportPlatform</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
