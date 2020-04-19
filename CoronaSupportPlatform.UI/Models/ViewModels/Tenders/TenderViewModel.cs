@@ -13,25 +13,20 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
     {
         public int TenderId { get; set; }
 
-
         public string RefNumber { get; set; }
 
-
         public int UserId { get; set; }
-
 
         public int? OrganizationId { get; set; }
 
         //[Required(ErrorMessage = "Talep adını giriniz.")]
         public string ShortDescription { get; set; }
 
-
         [Required(ErrorMessage = "Talebe ait mesaj giriniz")]
         public string LongDescription { get; set; }
 
         [Required(ErrorMessage = "Talebin teslim edilmesini istediğiniz adresi giriniz")]
         public string Address { get; set; }
-
 
         public TenderState State { get; set; }
 
@@ -43,23 +38,37 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Tenders
                 {
                     case TenderState.New:
                         return "Yeni";
-                    case TenderState.Active:
-                        return "Aktif";
+                    case TenderState.InProgress:
+                        return "İşleme Alındı";
+                    case TenderState.Scheduled:
+                        return "Üretim Planında";
+                    case TenderState.Produced:
+                        return "Üretildi";
+                    case TenderState.Procured:
+                        return "Tedarik Edildi";
+                    case TenderState.Packaged:
+                        return "Paketlendi";
+                    case TenderState.Invoiced:
+                        return "Faturalandı";
+                    case TenderState.Delivery:
+                        return "Kargoya Teslim Edildi";
+                    case TenderState.Delivered:
+                        return "Teslim Edildi";
                     case TenderState.Closed:
-                        return "Kapandı";
+                        return "Karşılandı";
                     case TenderState.Expired:
                         return "Süresi Doldu";
                     case TenderState.Passive:
                         return "Pasif";
+                    case TenderState.Cancelled:
+                        return "İptal Edildi";
                     default:
                         return "";
                 }
             }
         }
 
-
         public int ProductId { get; set; }
-
 
         public int Quantity { get; set; }
 

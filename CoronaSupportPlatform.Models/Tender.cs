@@ -27,6 +27,10 @@ namespace CoronaSupportPlatform.Models
 
         public string Address { get; set; }
 
+        public TenderChannel Channel { get; set; }
+
+        public TenderPriority Priority { get; set; }
+
         public TenderState State { get; set; }
 
         #region [ Navigation properties ]
@@ -47,6 +51,7 @@ namespace CoronaSupportPlatform.Models
 
         public virtual List<TenderLogEntry> Log { get; set; } = new List<TenderLogEntry>();
 
+        public virtual List<TenderNote> Notes { get; set; } = new List<TenderNote>();
 
         #endregion
     }

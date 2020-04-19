@@ -20,28 +20,30 @@
                     </div>
                     <div class="trad-history mt-4">
                         <div class="data-tables datatable-primary">
-                            <table id="tblOrganizations" class="text-center">
+                            <table id="tblOrganizations">
                                 <thead class="text-capitalize">
                                     <tr>
                                         <td style="width:5%">ID</td>
-                                        <td style="width:20%">Şehir</td>
-                                        <td style="width:55%">Hastane</td>
+                                        <td style="width:15%">Şehir</td>
+                                        <td style="width:35%">Organizasyon Adı</td>
+                                        <td style="width:10%">Tip</td>
                                         <td style="width:10%">Durum</td>
-                                        <td style="width:10%"></td>
+                                        <td style="width:15%"></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var organization in Model.Organizations)
                                     {
-                                        <tr>
-                                            <td style="width:5%">@organization.OrganizationId</td>
-                                            <td style="width:10%">@organization.City</td>
-                                            <td style="width:55%">@organization.Name</td>
-                                            <td style="width:10%"></td>
-                                            <td style="width:10%">
-                                                <button onclick="document.location.href='/Organizations/@organization.OrganizationId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td style="width:5%">@organization.OrganizationId</td>
+                                        <td style="width:15%">@organization.City</td>
+                                        <td style="width:45%">@organization.Name</td>
+                                        <td style="width:10%">@organization.TypeName</td>
+                                        <td style="width:10%">@organization.StatusName</td>
+                                        <td style="width:15%">
+                                            <button onclick="document.location.href='/Organizations/@organization.OrganizationId'" type="button" class="btn btn-primary pull-right">Görüntüle</button>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -49,7 +51,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <a class="btn btn-warning mb-1 mt-3 pull-right" href="/Organizations/New">Yeni Hastane</a>
+                            <a class="btn btn-warning mb-1 mt-3 pull-right" href="/Organizations/New">Yeni Organizasyon</a>
                         </div>
                     </div>
                 </div>

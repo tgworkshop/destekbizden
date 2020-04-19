@@ -630,8 +630,14 @@ namespace CoronaSupportPlatform.UI.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (!String.IsNullOrEmpty(returnUrl))
             {
+                // Modify if necessary
+                if (returnUrl == "/Default")
+                {
+                    returnUrl = "";
+                }
+
                 return Redirect(returnUrl);
             }
 

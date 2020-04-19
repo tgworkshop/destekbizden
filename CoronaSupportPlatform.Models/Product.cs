@@ -21,5 +21,14 @@ namespace CoronaSupportPlatform.Models
 
         public string LongDescription { get; set; }
 
+        public int SortOrder { get; set; } = 0;
+
+        #region [ Navigation properties ]
+
+        public virtual List<ProductProperty> Properties { get; set; } = new List<ProductProperty>();
+
+        public virtual List<ProductTag> Tags { get; set; } = new List<ProductTag>();
+
+        #endregion
     }
 }

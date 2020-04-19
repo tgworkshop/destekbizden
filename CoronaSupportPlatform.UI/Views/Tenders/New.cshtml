@@ -58,7 +58,7 @@
                                 </div>
                             }
                             <div class="row form-gp ml-0">
-                                @foreach (var product in Model.Products)
+                                @foreach (var product in Model.Products.OrderBy(p => p.SortOrder))
                                 {
                                     <div class="col-sm-8 p-3 mb-1" style="border:solid 1px lightgray">
                                         <img src="~/Content/images/products/@(product.Code).jpg" style="width:50px" /> @product.Name @Html.Raw(product.ShortDescription)

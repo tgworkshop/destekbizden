@@ -1,4 +1,5 @@
-﻿using CoronaSupportPlatform.Models;
+﻿using CoronaSupportPlatform.Common;
+using CoronaSupportPlatform.Models;
 using CoronaSupportPlatform.Models.Identity;
 using CoronaSupportPlatform.UI.Models.ViewModels.Tenders;
 using System.Collections.Generic;
@@ -12,15 +13,64 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Organizations
 
         public string Name { get; set; }
 
+        public OrganizationType Type { get; set; }
+        
         public string District { get; set; }
 
         public string City { get; set; }
+
+        public string Region { get; set; }
 
         public string ShortDescription { get; set; }
 
         public string LongDescription { get; set; }
 
         public string Website { get; set; }
+
+        public EntityStatus Status { get; set; }
+
+        #region [ Calculated fields ]
+
+        public string TypeName { 
+            get
+            {
+                switch (Type)
+                {
+                    case OrganizationType.Hospital:
+                        return "Hastane";
+                    case OrganizationType.RegionalHealthAdministration:
+                        return "Bölge Sağlık İdaresi";
+                    case OrganizationType.Supplier:
+                        return "Paydaş";
+                    case OrganizationType.None:
+                    default:
+                        return "Girilmemiş";
+
+                }
+            }
+        }
+
+        public string StatusName
+        {
+            get
+            {
+                switch (Status)
+                {
+                    case EntityStatus.Draft:
+                        return "Taslak";
+                    case EntityStatus.Active:
+                        return "Aktif";
+                    case EntityStatus.Passive:
+                        return "Pasif";
+                    case EntityStatus.Unknown:
+                    default:
+                        return "Girilmemiş";
+
+                }
+            }
+        }
+
+        #endregion
 
         #region [ Contact information ]
 
@@ -53,6 +103,8 @@ namespace CoronaSupportPlatform.UI.Models.ViewModels.Organizations
             this.LongDescription = organization.LongDescription;
             this.Website = organization.Website;
             this.Phone = organization.Phone;
+            this.Type = organization.Type;
+            this.Status = organization.Status;
 
             // Set collections
             this.Users = organization.Users;

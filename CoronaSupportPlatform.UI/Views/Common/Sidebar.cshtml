@@ -26,6 +26,16 @@
                                 <li><a href="/Users/New">Yeni Kullanıcı</a></li>
                             </ul>
                         </li>
+                        <li @(path.Contains("Users") ? "class=active" : "")>
+                            <a href="javascript:void(0)" aria-expanded="true">
+                                <i class="ti-user"></i><span>Organizasyonlar</span>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="/Organizations">Organizasyon Listesi</a></li>
+                                <li><a href="/Organizations?t=h">Hastane Listesi</a></li>
+                                <li><a href="/Organizations/New">Yeni Organizasyon</a></li>
+                            </ul>
+                        </li>
                     }
                     <li @(path.Contains("Tenders") ? "class=active" : "")>
                         <a href="javascript:void(0)" aria-expanded="true">

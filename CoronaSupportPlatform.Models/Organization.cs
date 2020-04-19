@@ -22,13 +22,17 @@ namespace CoronaSupportPlatform.Models
 
         public string ShortDescription { get; set; }
 
-        public string LongDescription { get; set; }
-
+        public string LongDescription { get; set; }        
+        
+        #region [ Contact information ]
+        
         public string Website { get; set; }
 
-        #region [ Contact information ]
-
         public string Phone { get; set; }
+
+        public string ContactPerson { get; set; }
+
+        public string ContactPhone { get; set; }
 
         #endregion
 

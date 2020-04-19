@@ -46,7 +46,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var tender in Model.Tenders.Where(t => t.State == CoronaSupportPlatform.Models.TenderState.New || t.State == CoronaSupportPlatform.Models.TenderState.Active).OrderByDescending(t => t.Created))
+                                            @foreach (var tender in Model.Tenders.Where(t => t.State == CoronaSupportPlatform.Models.TenderState.New || t.State == CoronaSupportPlatform.Models.TenderState.InProgress).OrderByDescending(t => t.Created))
                                             {
                                                 <tr>
                                                     <td style="width:5%">@tender.TenderId</td>

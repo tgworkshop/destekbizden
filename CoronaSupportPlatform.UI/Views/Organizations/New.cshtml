@@ -1,10 +1,10 @@
 ﻿@model CoronaSupportPlatform.UI.Models.ViewModels.Tenders.TenderViewModel
 @{
-    ViewBag.Title = "Yeni İhtiyaç";
+    ViewBag.Title = "Yeni Hastane";
 }
 
 <div class="main-content-inner">
-    @using (Html.BeginForm("New", "Tenders", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "editForm", role = "form" }))
+    @using (Html.BeginForm("New", "Organizations", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "editForm", role = "form" }))
     {
         @Html.HiddenFor(o => Model.CurrentOrganization.OrganizationId)
 

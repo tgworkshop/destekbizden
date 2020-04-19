@@ -41,16 +41,16 @@
     <!-- login area start -->
     <div class="login-area">
         <div class="container">
-            <div class="login-box ptb--100">
+            <div class="login-box ptb--50">
                 @using (Html.BeginForm("Register", "Identity", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "loginForm", @class = "login-form", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
+
                     <div class="login-form-head">
                         <h4>Kayıt Ol</h4>
                         <p>Kayıt olmak için lütfen aşağıdaki formu doldurarak gönder tuşuna basınız.</p>
                     </div>
-                    <div class="login-form-body">
-
+                    <div class="login-form-body" style="padding:20px !important">
                         @if (Model.Errors.Any())
                         {
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -65,95 +65,101 @@
                                 </button>
                             </div>
                         }
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tenderOwner-tab" data-toggle="tab" href="#tenderOwner" role="tab" aria-controls="tenderOwner" aria-selected="true">Talep Sahibi</a>
+                            </li>
+                            @*<li class="nav-item">
+                                <a class="nav-link" id="supporter-tab" data-toggle="tab" href="#supporter" role="tab" aria-controls="supporter" aria-selected="false">Paydaş</a>
+                            </li>*@
+                        </ul>
+                        <div class="tab-content mt-3" id="myTabContent">
+                            <div class="tab-pane fade show active" id="tenderOwner" role="tabpanel" aria-labelledby="tenderOwner-tab" style="min-height:575px;">
+                                <div class="form-gp">
+                                    <label for="txtFirstname">Adınız<span style="color:red">*</span></label>
+                                    <input type="text" id="txtFirstname" name="Firstname" value="@Model.Firstname">
+                                    <i class="ti-user"></i>
+                                </div>
+                                <div class="form-gp">
+                                    <label for="txtLastname">Soyadınız<span style="color:red">*</span></label>
+                                    <input type="text" id="txtLastname" name="Lastname" value="@Model.Lastname">
+                                    <i class="ti-user"></i>
+                                </div>
+                                <div class="form-gp">
+                                    @*<label for="ddlOccupation">Göreviniz</label>*@
+                                    <select name="Occupation" class="custom-select">
+                                        <option value="">Görevinizi seçiniz</option>
+                                        <option value="1005">İdari Personel</option>
+                                        <option value="1004">Doktor</option>
+                                        <option value="2">Diğer Sağlık Personeli</option>
+                                    </select>
+                                </div>
+                                <div class="form-gp">
+                                    @*<label for="ddlOrganization">Hastane</label>*@
+                                    <select name="OrganizationId" class="custom-select">
+                                        <option value="">Hastanenizi seçiniz</option>
+                                        <option value="1063">BİREYSEL TALEP</option>
+                                        @{
+                                            // Get all organizations
+                                            var organizations = Model.Organizations.OrderBy(o => o.City).ThenBy(o => o.Name).ToList();
 
-                        <div class="form-gp">
-                            <label for="txtFirstname">Adınız<span style="color:red">*</span></label>
-                            <input type="text" id="txtFirstname" name="Firstname" value="@Model.Firstname">
-                            <i class="ti-user"></i>
-                        </div>
-                        <div class="form-gp">
-                            <label for="txtLastname">Soyadınız<span style="color:red">*</span></label>
-                            <input type="text" id="txtLastname" name="Lastname" value="@Model.Lastname">
-                            <i class="ti-user"></i>
-                        </div>
-                        <div class="form-gp">
-                            @*<label for="ddlOccupation">Göreviniz</label>*@
-                            <select name="Occupation" class="custom-select">
-                                <option value="">Görevinizi seçiniz</option>
-                                <option value="1005">İdari Personel</option>
-                                <option value="1004">Doktor</option>
-                                <option value="2">Diğer Sağlık Personeli</option>
-                            </select>
-                        </div>
-                        <div class="form-gp">
-                            @*<label for="ddlOrganization">Hastane</label>*@
-                            <select name="OrganizationId" class="custom-select">
-                                <option value="">Hastanenizi seçiniz</option>
-                                <option value="1063">BİREYSEL TALEP</option>
-                                @{ 
-                                    // Get all organizations
-                                    var organizations = Model.Organizations.OrderBy(o => o.City).ThenBy(o => o.Name).ToList();
+                                            // Remove the selection for individuals
+                                            organizations.RemoveAll(o => o.OrganizationId == 1063);
+                                        }
 
-                                    // Remove the selection for individuals
-                                    organizations.RemoveAll(o => o.OrganizationId == 1063);
-                                }
-
-                                @foreach (var organization in organizations)
-                                {
-                                    <option value="@organization.OrganizationId" @(organization.OrganizationId == Model.OrganizationId ? "selected" : "")>@(organization.City + " " + organization.Name)</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="form-gp">
-                            <select name="Department" class="custom-select">
-                                <option value="">Departman seçiniz</option>
-                                @{
-                                    var departmentList = new List<string> { "Acil Servis", "Yoğun Bakım", "Kadın Hastalıkları ve Doğum", "Çocuk Yoğun Bakım/Acil",
-                                                                                "Göğüs Hastalıkları", "Dahiliye", "Anestezi", "Radyoloji", "Kulak-Burun-Boğaz", "Psikiyatri", 
+                                        @foreach (var organization in organizations)
+                                        {
+                                            <option value="@organization.OrganizationId" @(organization.OrganizationId == Model.OrganizationId ? "selected" : "")>@(organization.City + " " + organization.Name)</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-gp">
+                                    <select name="Department" class="custom-select">
+                                        <option value="">Departman seçiniz</option>
+                                        @{
+                                            var departmentList = new List<string> { "Acil Servis", "Yoğun Bakım", "Kadın Hastalıkları ve Doğum", "Çocuk Yoğun Bakım/Acil",
+                                                                                "Göğüs Hastalıkları", "Dahiliye", "Anestezi", "Radyoloji", "Kulak-Burun-Boğaz", "Psikiyatri",
                                                                                     "Pediatri"};
-                                }
-                                @foreach (var department in departmentList.OrderBy(d => d))
-                                {
-                                    <option value="@department" @(department == Model.Department ? "selected" : "")>@department</option>
-                                }
-                                <option value="Diğer" @("Diğer" == Model.Department ? "selected" : "")>Diğer</option>
-                            </select>
+                                        }
+                                        @foreach (var department in departmentList.OrderBy(d => d))
+                                        {
+                                            <option value="@department" @(department == Model.Department ? "selected" : "")>@department</option>
+                                        }
+                                        <option value="Diğer" @("Diğer" == Model.Department ? "selected" : "")>Diğer</option>
+                                    </select>
+                                </div>
+                                <div class="form-gp">
+                                    <label for="txtEmail">E-posta adresiniz<span style="color:red">*</span></label>
+                                    <input type="email" id="txtEmail" name="Email" value="@Model.Email">
+                                    <i class="ti-email"></i>
+                                    <div class="text-danger"></div>
+                                </div>
+                                <div class="form-gp">
+                                    <label for="txtMobile">Cep telefonu numaranız<span style="color:red">*</span></label>
+                                    <input type="tel" id="txtMobile" name="Mobile" value="@Model.Mobile">
+                                    <i class="ti-mobile"></i>
+                                    <div class="text-danger"></div>
+                                </div>
+                                <div class="form-gp">
+                                    <label for="txtPassword">Şifreniz<span style="color:red">*</span></label>
+                                    <input type="password" id="txtPassword" name="Password">
+                                    <i class="ti-lock"></i>
+                                    <div class="text-danger"></div>
+                                </div>
+                                <div class="submit-btn-area">
+                                    <button id="form_submit" type="submit">GÖNDER <i class="ti-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="supporter" role="tabpanel" aria-labelledby="supporter-tab" style="min-height:575px;">
+                                <p>Paydaş başvuru sürecimiz henüz devreye alınmamıştır.</p>
+                            </div>
                         </div>
-                        <div class="form-gp">
-                            <label for="txtEmail">E-posta adresiniz<span style="color:red">*</span></label>
-                            <input type="email" id="txtEmail" name="Email" value="@Model.Email">
-                            <i class="ti-email"></i>
-                            <div class="text-danger"></div>
-                        </div>
-                        <div class="form-gp">
-                            <label for="txtMobile">Cep telefonu numaranız<span style="color:red">*</span></label>
-                            <input type="tel" id="txtMobile" name="Mobile" value="@Model.Mobile">
-                            <i class="ti-mobile"></i>
-                            <div class="text-danger"></div>
-                        </div>                        
-                        <div class="form-gp">
-                            <label for="txtPassword">Şifreniz<span style="color:red">*</span></label>
-                            <input type="password" id="txtPassword" name="Password">
-                            <i class="ti-lock"></i>
-                            <div class="text-danger"></div>
-                        </div>
-                        <div class="submit-btn-area">
-                            <button id="form_submit" type="submit">GÖNDER <i class="ti-arrow-right"></i></button>
-                            @*<div class="login-other row mt-4">
-                                    <div class="col-6">
-                                        <a class="fb-login" href="#">Log in with <i class="fa fa-facebook"></i></a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="google-login" href="#">Log in with <i class="fa fa-google"></i></a>
-                                    </div>
-                                </div>*@
-                        </div>
-                        <div class="form-footer text-center mt-5">
+                        <div class="form-footer text-center">
                             <p class="text-muted">Hesabınız var mı? <a href="/login">Oturum Aç</a></p>
                         </div>
                     </div>
                 }
-                }
+
             </div>
             <!-- login area end -->
             <!-- jquery latest version -->

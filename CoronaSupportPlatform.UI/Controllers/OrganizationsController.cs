@@ -27,7 +27,7 @@ namespace CoronaSupportPlatform.UI.Controllers
         }
 
         [Route("")]
-        public ActionResult Index()
+        public ActionResult Index(string t)
         {
             // Create the model
             var model = new OrganizationListViewModel();
@@ -45,7 +45,7 @@ namespace CoronaSupportPlatform.UI.Controllers
             #region [ Breadcrumb ]
 
             var breadcrumb = new BreadcrumbViewModel();
-            breadcrumb.PageName = "Hastane Listesi";
+            breadcrumb.PageName = "Organizasyon Listesi";
             breadcrumb.Items.Add("Anasayfa", "/");
             breadcrumb.Items.Add("Hastane Listesi", "");
             TempData["Breadcrumb"] = breadcrumb;

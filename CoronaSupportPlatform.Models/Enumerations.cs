@@ -10,20 +10,59 @@ namespace CoronaSupportPlatform.Models
     // TENDERS
     public enum TenderState
     {
-        [Display(Name = "Yeni")]
         New = 0,
 
-        [Display(Name = "Aktif")]
-        Active = 1,
+        InProgress = 10,
 
-        [Display(Name = "Pasif")]
+        Scheduled = 11,
+
+        Produced = 12,
+
+        Procured = 13,
+
+        Packaged = 20,
+
+        Invoiced = 21,
+
+        Delivery = 31,
+
+        Delivered = 32,
+
+        Closed = 40,
+
         Passive = -1,
 
-        [Display(Name = "Süresi Doldu")]
         Expired = -99,
 
-        [Display(Name = "Karşılandı")]
-        Closed = 2
+        Cancelled = -999,
+    }
+
+    public enum TenderChannel
+    {
+        Platform = 0,
+
+        SM_Facebook = 10,
+
+        SM_Twitter = 11,
+
+        SM_Instagram = 12,
+
+        Phone = 20,
+
+        Email = 30
+    }
+
+    public enum TenderPriority
+    {
+        Low = -10,
+
+        Medium = 0,
+
+        High = 10,
+
+        Urgent = 20,
+
+        Critical = 30
     }
 
     public enum TenderItemState
@@ -48,6 +87,13 @@ namespace CoronaSupportPlatform.Models
         Assigned = 1,
 
         Accepted = 2,
+    }
+
+    public enum TenderNoteType
+    {
+        Public = 0,
+
+        Administrative = 1,
     }
 
     // ASSIGNMENTS

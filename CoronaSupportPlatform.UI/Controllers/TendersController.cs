@@ -286,7 +286,7 @@ namespace CoronaSupportPlatform.UI.Controllers
                     breadcrumb.PageName = "İhtiyaç Detay";
                     breadcrumb.Items.Add("Anasayfa", "/");
                     breadcrumb.Items.Add("İhtiyaç Listesi", "/Tenders");
-                    breadcrumb.Items.Add(tender.ShortDescription, "");
+                    breadcrumb.Items.Add(!String.IsNullOrEmpty(tender.ShortDescription) ? tender.ShortDescription : tender.TenderId.ToString(), "");
                     TempData["Breadcrumb"] = breadcrumb;
 
                     #endregion
